@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>樋口隆史｜現場の聞き取りから要件を定め、担当者が替わっても業務が回る仕組みづくりまで</title>
+<meta name="description" content="現場の困りごとを丁寧に聞き取り、課題と要件を見極めて生成AIを業務に組み込み、担当者が替わっても業務が回る仕組みにして引き継ぎます。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://takashi-101.github.io/">
+<meta property="og:title" content="樋口隆史｜現場の聞き取りから要件を定め、担当者が替わっても業務が回る仕組みづくりまで">
+<meta property="og:description" content="現場の困りごとを丁寧に聞き取り、課題と要件を見極めて生成AIを業務に組み込み、担当者が替わっても業務が回る仕組みにして引き継ぎます。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=BIZ+UDPGothic:wght@400;700&family=BIZ+UDPMincho:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F5F7F6; --card:#FFFFFF; --ink:#1C2833; --sub:#55636F; --rule:#C8D2D4;
+  --ai:#2A5A8C; --tint:#E4ECF2;
+  --mincho:"BIZ UDPMincho","Hiragino Mincho ProN","Yu Mincho",serif;
+  --gothic:"BIZ UDPGothic","Hiragino Sans","Yu Gothic","Meiryo",sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root{--paper:#141B22;--card:#19222B;--ink:#E6ECEF;--sub:#A3B0BA;--rule:#2F3B45;--ai:#8DB4DE;--tint:#1F2D3A;color-scheme:dark}
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--gothic);font-size:1rem;line-height:1.8}
+.wrap{max-width:60rem;margin:0 auto;padding:0 1.25rem}
+.narrow{max-width:44rem}
+a{color:var(--ai);text-underline-offset:.2em}
+a:focus-visible{outline:2px solid var(--ai);outline-offset:2px}
+h1,h2,h3{font-family:var(--mincho);font-weight:700;line-height:1.45;letter-spacing:.02em}
+h2{font-size:1.3rem;margin:3.5rem 0 .6rem}
+p{margin:.6rem 0}
+
+header{padding:4.5rem 0 2rem}
+.name{font-family:var(--mincho);color:var(--sub);margin:0 0 1.25rem}
+h1{font-size:clamp(1.5rem,4.4vw,2.1rem);margin:0 0 1.25rem}
+h1 span{display:inline-block}
+header>*{max-width:44rem}
+header>h1{max-width:none}
+.lead{font-size:1.05rem;margin:0 0 1rem}
+.about{background:var(--card);border:1px solid var(--rule);border-radius:4px;padding:.7rem .9rem;margin:0 0 .8rem;font-size:.9rem;line-height:1.75}
+.about p{margin:0}
+.fde{margin:0 0 1rem;padding-left:1.2em;font-size:.95rem}
+.fde li{margin:.15rem 0}
+.roles{font-size:.88rem;color:var(--sub);margin:0}
+
+.intro{color:var(--sub);font-size:.95rem;margin-bottom:1.25rem}
+
+/* 型の見出し（3段の意味をここで一度だけ示す） */
+.flowhead{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.75rem;margin:0 0 .5rem;padding:0 1.1rem;font-size:.82rem;font-weight:700;color:var(--sub)}
+.flowhead span:last-child{color:var(--ai)}
+
+.case{background:var(--card);border:1px solid var(--rule);border-radius:4px;padding:1rem 1.1rem 1.05rem;margin:0 0 .8rem}
+.case h3{font-size:1.02rem;margin:0 0 .55rem}
+.case h3 small{font-family:var(--gothic);font-weight:400;font-size:.82rem;color:var(--sub);margin-left:.6em}
+.steps{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.75rem;margin:0}
+.steps p{margin:0;font-size:.92rem;line-height:1.7}
+.steps p:last-child{background:var(--tint);border-left:3px solid var(--ai);padding:.35rem .6rem;border-radius:2px}
+.steps b{display:none}
+
+.works{list-style:none;margin:0;padding:0}
+.works li{padding:.55rem 0;border-bottom:1px solid var(--rule);font-size:.95rem}
+.works li:last-child{border-bottom:0}
+.works a{font-weight:700;margin-right:.6em}
+
+.tbl{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:.88rem}
+th,td{text-align:left;vertical-align:top;padding:.45rem .55rem;border-bottom:1px solid var(--rule)}
+th{color:var(--sub);font-weight:700;font-size:.82rem}
+.note{font-size:.85rem;color:var(--sub)}
+footer{margin:4rem 0 3rem;padding-top:1rem;border-top:1px solid var(--rule);font-size:.85rem;color:var(--sub)}
+
+
+/* 工程の図 */
+.flow{margin:0 0 1rem;padding:2.2rem 0 0;border-top:1px solid var(--rule)}
+.flow ol{list-style:none;margin:0;padding:0;display:flex;align-items:stretch;gap:0}
+.flow li{flex:1 1 0;display:flex;align-items:center}
+.flow .node{flex:1;text-align:center;font-size:.92rem;font-weight:700;padding:.7rem .3rem;border:1px solid var(--rule);border-radius:4px;background:var(--card);line-height:1.4}
+.flow li:not(:last-child)::after{content:"";flex:0 0 1.1rem;height:2px;background:var(--sub);margin:0 .15rem;position:relative}
+.flow li:not(:last-child){position:relative}
+.flow li:not(:last-child)::before{content:"";position:absolute;right:.15rem;top:50%;width:0;height:0;border-left:6px solid var(--sub);border-top:5px solid transparent;border-bottom:5px solid transparent;transform:translateY(-50%)}
+.flow .plus .node{background:var(--tint);border:2px solid var(--ai);color:var(--ai);flex:1.3}
+.flow .plus{flex:1.3 1 0}
+.flow .node small{display:block;font-weight:400;font-size:.76rem;color:var(--sub);margin-top:.2rem}
+.flow .plus .node small{color:var(--ai)}
+.flow .last::after,.flow .last::before{display:none}
+.flow .plus{position:relative;padding-left:1.1rem;margin-left:.6rem;border-left:2px dashed var(--sub)}
+.flow .plus .mark{position:absolute;left:-.1rem;top:-1.35rem;font-size:.72rem;color:var(--sub);white-space:nowrap;transform:translateX(-50%)}
+.flow p{font-size:.88rem;color:var(--sub);margin:.7rem 0 0}
+@media (max-width:42rem){
+  .flow ol{flex-wrap:wrap;gap:.5rem .2rem}
+  .flow li{flex:0 0 calc(33.33% - .2rem)}
+  .flow .plus{flex:0 0 100%;border-left:0;margin-left:0;padding-left:0;border-top:2px dashed var(--sub);padding-top:1.3rem;margin-top:.4rem}
+  .flow .plus .mark{left:0;top:.2rem;transform:none}
+}
+@media (max-width:42rem){
+  .flowhead{display:none}
+  .steps{grid-template-columns:1fr;gap:.45rem}
+  .steps b{display:block;font-size:.78rem;color:var(--sub);margin-bottom:.1rem}
+  .steps p:last-child b{color:var(--ai)}
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+<header>
+  <p class="name">樋口 隆史（ひぐち たかし）　福岡</p>
+  <h1><span>現場の聞き取りから要件を定め、</span><br><span>担当者が替わっても</span><span>業務が回る仕組みづくりまで。</span></h1>
+  <p class="lead">現場の困りごとを丁寧に聞き取って課題を見極め、生成AIを業務に組み込み、手順として残して引き継ぎます。</p>
+  <div class="about">
+    <p><b>FDE（Forward Deployed Engineer）とは</b>　顧客の現場に入り、業務の設計から仕組みづくり、定着、成果の展開までを担う役割です。米国のパランティア（Palantir Technologies）が、技術者を顧客の現場に直接送り込む職種として始めたものです。国内では、IoT検定制度委員会が2026年6月に国内初のFDE検定制度の構想を発表し、9月に試験の評価基準を公開してベータ試験を始めました。同委員会は、現場への定着と、成果を再現できる形で組織全体へ広げることを、FDEに欠かせない責任範囲としています。</p>
+  </div>
+  <ul class="fde">
+    <li>2026年9月　日本FDE協会の会員になりました。</li>
+    <li>2026年9月　FDE検定（IoT検定制度委員会）で、試験の内容や合否基準の妥当性を確かめるためのベータ試験（対象約100名）に、複数回の案内を受けて参加しました（結果は公表待ち）。</li>
+  </ul>
+  <p class="roles">デジタル推進委員（デジタル庁任命）／AI業務支援士／生成AIパスポート／実務教育学修士（専門職）</p>
+</header>
+
+<section class="flow" aria-label="仕事の進め方">
+  <ol>
+    <li><span class="node">要件定義</span></li>
+    <li><span class="node">設計</span></li>
+    <li><span class="node">試作</span></li>
+    <li><span class="node">試行運用</span></li>
+    <li class="last"><span class="node">定着<small>組織と個人に</small></span></li>
+    <li class="plus"><span class="mark">通常はここまで</span><span class="node">＋ 再現性<small>担当者が替わっても回る</small></span></li>
+  </ol>
+  <p>定着させたうえで、手順として残し、担当者が替わっても同じ結果が出る状態にして引き継ぎます。下の各取り組みの右端の欄が、その結果です。</p>
+</section>
+</div>
+
+<div class="wrap">
+<section>
+  <h2>私立大学職員時代</h2>
+  <p class="intro">私立大学の事務職員として24年。大学には案件ごとに体制や予算を組む仕組みがなく、どれも通常業務と並行して自分で立ち上げたものです。</p>
+
+  <div class="flowhead" aria-hidden="true"><span>要件定義</span><span>設計・実装</span><span>定着・再現性</span></div>
+
+  <article class="case">
+    <h3>学内印刷業務の子会社移管<small>2011年</small></h3>
+    <div class="steps">
+      <p><b>要件定義</b>担当外の立場から、発注の条件が余剰在庫と特定の職員への業務集中を生んでいる構造をつかんだ</p>
+      <p><b>設計・実装</b>収益子会社へ移す案を提案し、採用されて設立</p>
+      <p><b>定着・再現性</b>提案者の手を離れて独立運営に。累計10億円超の収益事業になり、他大学も導入</p>
+    </div>
+  </article>
+
+  <article class="case">
+    <h3>遠隔会議の導入<small>2018年</small></h3>
+    <div class="steps">
+      <p><b>要件定義</b>全学の会議のたびに、授業や研究指導が止まっていた</p>
+      <p><b>設計・実装</b>最上位の会議体から導入し、5年の回収計画で投資判断を得た</p>
+      <p><b>定着・再現性</b>トラブル事例を画像付きの手順書にし、他部署が自ら利用を申し出た。1日4〜5件の会議で使われる状態に</p>
+    </div>
+  </article>
+
+  <article class="case">
+    <h3>駐車場の利用区分の再設計<small>2019年</small></h3>
+    <div class="steps">
+      <p><b>要件定義</b>30年続く赤字。許可枚数に根拠がなく、利用区分と実際の利用者が一致していなかった</p>
+      <p><b>設計・実装</b>天候や行事などの条件別に利用の実態を測り、日勤と夜勤の重なりから許可枚数を算出</p>
+      <p><b>定着・再現性</b>巡回記録が仕組みとして続き、追加投資なしで許可枚数1.5倍、赤字から黒字へ</p>
+    </div>
+  </article>
+
+  <article class="case">
+    <h3>認証評価のオンライン実地調査<small>2020年</small></h3>
+    <div class="steps">
+      <p><b>要件定義</b>コロナ禍で、集まることを嫌う教職員を集め、会場を一人で作る必要があった</p>
+      <p><b>設計・実装</b>費用ゼロで会場を自作し、感染対策の責任者の出席を先に確保して全学の体制を組んだ</p>
+      <p><b>定着・再現性</b>全日程トラブルゼロ。少数で受けていた実地調査を全学参加型に変え、大学基準に適合</p>
+    </div>
+  </article>
+
+  <article class="case">
+    <h3>生成AIによる窓口対応の標準化<small>2023年</small></h3>
+    <div class="steps">
+      <p><b>要件定義</b>窓口対応が一部の6名に偏り、昼休みも返上していた</p>
+      <p><b>設計・実装</b>生成AIで各係のマニュアルを統合し、回答案を12名全員で確かめて、答えが割れる箇所を直した</p>
+      <p><b>定着・再現性</b>2係12名全員が一次対応できる体制に。二次対応は来訪者の約2割まで減少</p>
+    </div>
+  </article>
+
+  <article class="case">
+    <h3>生成AIとの分業による業務の見直し<small>2023〜2024年</small></h3>
+    <div class="steps">
+      <p><b>要件定義</b>AIに任せられる部分と、人が持つべき部分を分ける</p>
+      <p><b>設計・実装</b>AIに任せる部分を切り分け、最終責任は人が持つ型で運用</p>
+      <p><b>定着・再現性</b>1日の仕事が半日に。大学と福岡市役所の両方で再現</p>
+    </div>
+  </article>
+</section>
+
+<section>
+  <h2>行政と地域の現場へ（2025年〜）</h2>
+  <p class="intro">実装にはAIコーディング支援を使い、出力が正しいかの照合と判断は自分で行っています。コードと全出力を公開し、誰でも同じ結果を確かめられる形で残しています。</p>
+
+  <div class="flowhead" aria-hidden="true"><span>要件定義</span><span>設計・実装</span><span>定着・再現性</span></div>
+
+  <article class="case">
+    <h3>太宰府市役所への課題解決案<small>2025年</small></h3>
+    <div class="steps">
+      <p><b>要件定義</b>太宰府市役所が抱えていた課題を聞き取った</p>
+      <p><b>設計・実装</b>同様の課題を解決した他の自治体の前例を付けて、解決案のたたき台を作成</p>
+      <p><b>定着・再現性</b>採用を求めず、使える部分を自由に使える形で無償提供</p>
+    </div>
+  </article>
+
+  <article class="case">
+    <h3>福岡市役所での滞留処理と手順の標準化<small>2025年</small></h3>
+    <div class="steps">
+      <p><b>要件定義</b>照会業務1,176件が滞留していた</p>
+      <p><b>設計・実装</b>業務の流れを3つに分け、並行して処理する形に組み直した</p>
+      <p><b>定着・再現性</b>標準処理手順書で平均処理時間を半分に、誤りは0件。庁内の標準として登録</p>
+    </div>
+  </article>
+
+  <article class="case">
+    <h3>デジタル推進委員向けの講座<small>2026年</small></h3>
+    <div class="steps">
+      <p><b>要件定義</b>受講者はシニアのデジタル推進委員。自分の生活ですぐ使える題材に絞る</p>
+      <p><b>設計・実装</b>60分のオンライン講座を、受講者に操作を求めない形で設計</p>
+      <p><b>定着・再現性</b>教材と動画が法人内で共有された。講座で出た質問には、後日出典を付けて回答</p>
+    </div>
+  </article>
+
+  <article class="case">
+    <h3>閉域環境での生成AIの検証と導入手順<small>2026年</small></h3>
+    <div class="steps">
+      <p><b>要件定義</b>ネットにつながないPCで、AIが規程から守るべき事項を漏れなく抜き出せるか。それをどう確かめるか</p>
+      <p><b>設計・実装</b>2つの方式を比べ、判定と照合を自動化。照合の誤判定は自分で見つけて直した</p>
+      <p><b>定着・再現性</b>コードと全出力を公開。その結果をもとに、導入の確認手順と、AIの置き場所の判定ツールも公開</p>
+    </div>
+  </article>
+</section>
+</div>
+
+<div class="wrap narrow">
+<section>
+  <h2>公開しているもの</h2>
+  <ul class="works">
+    <li><a href="https://github.com/takashi-101/local-llm-record">local-llm-record</a>閉域環境での生成AIの出力検証の記録</li>
+    <li><a href="https://github.com/takashi-101/fde-checklist">fde-checklist</a>閉域での導入の確認手順と、AIの置き場所の判定ツール</li>
+    <li><a href="https://github.com/takashi-101/funding-guide">funding-guide</a>AI導入と人材育成に使える公的制度の探索と試算</li>
+    <li><a href="https://github.com/takashi-101/readonly-mcp">readonly-mcp</a>AIに決まった文書だけを安全に読ませる仕組み</li>
+    <li><a href="https://github.com/takashi-101/remove-keep-marks">remove-keep-marks</a>Word文書の書式の不具合を原因から直すスクリプト</li>
+  </ul>
+</section>
+
+<section>
+  <h2>第三者が確認できる修了証</h2>
+  <div class="tbl">
+  <table>
+    <thead><tr><th>発行元</th><th>名称</th><th>確認先</th></tr></thead>
+    <tbody>
+<!-- 確認先のURLが入ったら、コメントを外して表に戻す
+      <tr><td>生成AI活用普及協会</td><td>生成AIパスポート（2023年10月）</td><td>オープンバッジ</td></tr>
+      <tr><td>IT整備士協会</td><td>AI業務支援士（2026年7月）</td><td>オープンバッジ</td></tr>
+      <tr><td>Google（Coursera）</td><td>Generative AI Leader Professional Certificate</td><td>Coursera</td></tr>
+      <tr><td>OpenAI Academy</td><td>AI Foundations／Applied AI Foundations／Agents and Workflows（修了証）</td><td>OpenAI Academy</td></tr>
+      <tr><td>AWS</td><td>Security Champion</td><td>Credly</td></tr>
+-->
+      <tr><td>Google（Coursera）</td><td>Google AI Professional Certificate</td><td><a href="https://www.coursera.org/account/accomplishments/specialization/H9FY7ZPABIVQ">Coursera</a></td></tr>
+      <tr><td>Anthropic</td><td>Claude Code in Action</td><td><a href="https://verify.skilljar.com/c/53iz7cz2u65x">53iz7cz2u65x</a></td></tr>
+      <tr><td>Anthropic</td><td>Claude with the Anthropic API</td><td><a href="https://verify.skilljar.com/c/xcpjvyndrvd5">xcpjvyndrvd5</a></td></tr>
+      <tr><td>Anthropic</td><td>Claude with Amazon Bedrock</td><td><a href="https://verify.skilljar.com/c/ehgb8v65eamz">ehgb8v65eamz</a></td></tr>
+      <tr><td>Anthropic</td><td>Claude with Google Vertex AI</td><td><a href="https://verify.skilljar.com/c/neh8xspsqzyx">neh8xspsqzyx</a></td></tr>
+      <tr><td>Anthropic</td><td>Introduction to Model Context Protocol</td><td><a href="https://verify.skilljar.com/c/f4mh7a6yywz4">f4mh7a6yywz4</a></td></tr>
+      <tr><td>Anthropic</td><td>Model Context Protocol: Advanced Topics</td><td><a href="https://verify.skilljar.com/c/gqjh45tamjd8">gqjh45tamjd8</a></td></tr>
+      <tr><td>AWS</td><td>Well-Architected Proficient（2025年5月）</td><td><a href="https://www.credly.com/badges/02e7928f-cf12-4e2e-83c3-d47b12386eb8">Credly</a></td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<footer>
+  <p>GitHub：<a href="https://github.com/takashi-101">takashi-101</a></p>
+</footer>
+</div>
+
+</body>
+</html>
