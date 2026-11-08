@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>閉域環境での生成AIの検証｜樋口隆史 ポートフォリオ</title>
+<meta name="description" content="ネットにつながないPCで、AIが規程文書から守るべき事項を漏れなく抜き出せるかを実測した記録。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=BIZ+UDPGothic:wght@400;700&family=BIZ+UDPMincho:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="detail">
+<div class="wrap">
+<a class="back" href="index.html">ポートフォリオのトップへ戻る</a>
+<header>
+  <p class="name">代表実績　2026年</p>
+  <h1>閉域環境での生成AIの検証</h1>
+</header>
+<section>
+  <h2>基本情報</h2>
+  <div class="tbl"><table>
+    <tr><th>体制と役割</th><td>個人で実施（1名）。検証の設計、判定基準の作成、実機での実行、出力と元の文書の照合</td></tr>
+    <tr><th>期間</th><td>2026年8月6日〜8月28日</td></tr>
+    <tr><th>課題</th><td>ネットにつながないPCで、AIが規程文書から守るべき事項を漏れなく抜き出せるか。抜き出せたかを、どう確かめるか</td></tr>
+    <tr><th>使用ツール</th><td>Windowsノート1台（NEC VersaPro・メモリ32GB）／LM Studio 0.4.20／モデル gpt-oss-20b ほか／Python 3.13（標準ライブラリのみ）／GitHub</td></tr>
+  </table></div>
+</section>
+
+<section>
+  <h2>作ったもの</h2>
+  <div class="made">
+<ul>
+<li><a href="https://github.com/takashi-101/local-llm-record">local-llm-record</a>：文書の全文を渡すスクリプト、関連部分だけを渡すスクリプト、出力を元の文書と照合するスクリプト、全実行の出力</li>
+<li><a href="https://github.com/takashi-101/fde-checklist">fde-checklist</a>：この結果をもとにした、閉域での導入の確認手順と、AIの置き場所の判定ツール</li>
+</ul>
+  </div>
+</section>
+
+<section>
+  <h2>進め方</h2>
+  <ol class="process">
+    <li>題材は、福岡県が公開している「生成AI庁内利活用ガイドライン（第2.2版）」。守るべき事項6項目と判定基準を、実測の前に決めた。</li>
+    <li>アプリの画面から実行すると、文書の一部しかAIに渡らず、守るべき事項が欠けた。</li>
+    <li>文書の全文を渡すスクリプトに切り替え、出力を元の文書と照合するスクリプトも作った。</li>
+    <li>照合スクリプトの初版は表記の揺れを拾えず、出ている項目を「無い」と誤って報告した。出力と元の文書を自分で突き合わせて見つけ、直した。</li>
+    <li>関連部分だけを検索して渡す方式（RAG）で、渡す件数を3件から23件まで変えて比べた。</li>
+  </ol>
+</section>
+
+<section>
+  <h2>結果</h2>
+  <div class="result">
+<p class="big">全文を渡すと、守るべき事項6項目すべてを抽出（欠落0件）</p>
+<ul>
+<li>入力8,343トークン・出力874トークン・81.54秒</li>
+<li>関連部分だけを渡す方式では、23件中12件を渡しても4項目にとどまった。渡した件数ごとの項目数は、3件で1、5件で0、8件で2、12件で4、23件（全件）で6</li>
+<li>件数を増やせば順に良くなるわけではなく、守るべき事項の本体が書かれた章のうち中心の2件は、全件を渡すまで一度も選ばれなかった</li>
+<li>すべて機内モード（通信を切った状態）で実行。コードと全出力を公開し、誰でも同じ結果を確かめられる</li>
+</ul>
+  </div>
+  <p class="note">自分のノートPCでの実測です。庁内ネットワークでの動作を保証するものではありません。</p>
+</section>
+
+<nav class="pager" aria-label="ほかの実績">
+  <span></span>
+  <span><a href="fukuoka-city.html">次の実績：福岡市役所での滞留処理と手順の標準化</a></span>
+</nav>
+
+<footer>
+  <p><a href="index.html">ポートフォリオのトップへ戻る</a>　GitHub：<a href="https://github.com/takashi-101">takashi-101</a></p>
+</footer>
+
+</div>
+</body>
+</html>
