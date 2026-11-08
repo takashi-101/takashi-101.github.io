@@ -33,6 +33,8 @@ table{border-collapse:collapse;width:100%;font-size:.92rem}
 th,td{text-align:left;vertical-align:top;padding:.5rem .6rem;border-bottom:1px solid var(--rule)}
 th{color:var(--sub);font-weight:700;white-space:nowrap;width:7.5em}
 
+.certs th{width:auto}
+.certs td:last-child{white-space:nowrap}
 .career{list-style:none;margin:0;padding:0}
 .career>li{padding:.8rem 0;border-bottom:1px solid var(--rule)}
 .career>li:last-child{border-bottom:0}
