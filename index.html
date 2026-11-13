@@ -1,299 +1,511 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>樋口隆史｜現場の聞き取りから要件を定め、担当者が替わっても業務が回る仕組みづくりまで</title>
-<meta name="description" content="現場の困りごとを丁寧に聞き取り、課題と要件を見極めて生成AIを業務に組み込み、担当者が替わっても業務が回る仕組みにして引き継ぎます。">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://takashi-101.github.io/">
-<meta property="og:title" content="樋口隆史｜現場の聞き取りから要件を定め、担当者が替わっても業務が回る仕組みづくりまで">
-<meta property="og:description" content="現場の困りごとを丁寧に聞き取り、課題と要件を見極めて生成AIを業務に組み込み、担当者が替わっても業務が回る仕組みにして引き継ぎます。">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=BIZ+UDPGothic:wght@400;700&family=BIZ+UDPMincho:wght@400;700&display=swap" rel="stylesheet">
-<style>
-:root{
-  --paper:#F5F7F6; --card:#FFFFFF; --ink:#1C2833; --sub:#55636F; --rule:#C8D2D4;
-  --ai:#2A5A8C; --tint:#E4ECF2;
-  --mincho:"BIZ UDPMincho","Hiragino Mincho ProN","Yu Mincho",serif;
-  --gothic:"BIZ UDPGothic","Hiragino Sans","Yu Gothic","Meiryo",sans-serif;
-  color-scheme:light;
-}
-@media (prefers-color-scheme:dark){
-  :root{--paper:#141B22;--card:#19222B;--ink:#E6ECEF;--sub:#A3B0BA;--rule:#2F3B45;--ai:#8DB4DE;--tint:#1F2D3A;color-scheme:dark}
-}
-*{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--gothic);font-size:1rem;line-height:1.8}
-.wrap{max-width:60rem;margin:0 auto;padding:0 1.25rem}
-.narrow{max-width:44rem}
-a{color:var(--ai);text-underline-offset:.2em}
-a:focus-visible{outline:2px solid var(--ai);outline-offset:2px}
-h1,h2,h3{font-family:var(--mincho);font-weight:700;line-height:1.45;letter-spacing:.02em}
-h2{font-size:1.3rem;margin:3.5rem 0 .6rem}
-p{margin:.6rem 0}
-
-header{padding:4.5rem 0 2rem}
-.name{font-family:var(--mincho);color:var(--sub);margin:0 0 1.25rem}
-h1{font-size:clamp(1.5rem,4.4vw,2.1rem);margin:0 0 1.25rem}
-h1 span{display:inline-block}
-header>*{max-width:44rem}
-header>h1{max-width:none}
-.lead{font-size:1.05rem;margin:0 0 1rem}
-.about{background:var(--card);border:1px solid var(--rule);border-radius:4px;padding:.7rem .9rem;margin:0 0 .8rem;font-size:.9rem;line-height:1.75}
-.about p{margin:0}
-.fde{margin:0 0 1rem;padding-left:1.2em;font-size:.95rem}
-.fde li{margin:.15rem 0}
-.roles{font-size:.88rem;color:var(--sub);margin:0}
-
-.intro{color:var(--sub);font-size:.95rem;margin-bottom:1.25rem}
-
-/* 型の見出し（3段の意味をここで一度だけ示す） */
-.flowhead{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.75rem;margin:0 0 .5rem;padding:0 1.1rem;font-size:.82rem;font-weight:700;color:var(--sub)}
-.flowhead span:last-child{color:var(--ai)}
-
-.case{background:var(--card);border:1px solid var(--rule);border-radius:4px;padding:1rem 1.1rem 1.05rem;margin:0 0 .8rem}
-.case h3{font-size:1.02rem;margin:0 0 .55rem}
-.case h3 small{font-family:var(--gothic);font-weight:400;font-size:.82rem;color:var(--sub);margin-left:.6em}
-.steps{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.75rem;margin:0}
-.steps p{margin:0;font-size:.92rem;line-height:1.7}
-.steps p:last-child{background:var(--tint);border-left:3px solid var(--ai);padding:.35rem .6rem;border-radius:2px}
-.steps b{display:none}
-
-.works{list-style:none;margin:0;padding:0}
-.works li{padding:.55rem 0;border-bottom:1px solid var(--rule);font-size:.95rem}
-.works li:last-child{border-bottom:0}
-.works a{font-weight:700;margin-right:.6em}
-
-.tbl{overflow-x:auto}
-table{border-collapse:collapse;width:100%;font-size:.88rem}
-th,td{text-align:left;vertical-align:top;padding:.45rem .55rem;border-bottom:1px solid var(--rule)}
-th{color:var(--sub);font-weight:700;font-size:.82rem}
-.note{font-size:.85rem;color:var(--sub)}
-footer{margin:4rem 0 3rem;padding-top:1rem;border-top:1px solid var(--rule);font-size:.85rem;color:var(--sub)}
-
-
-/* 工程の図 */
-.flow{margin:0 0 1rem;padding:2.2rem 0 0;border-top:1px solid var(--rule)}
-.flow ol{list-style:none;margin:0;padding:0;display:flex;align-items:stretch;gap:0}
-.flow li{flex:1 1 0;display:flex;align-items:center}
-.flow .node{flex:1;text-align:center;font-size:.92rem;font-weight:700;padding:.7rem .3rem;border:1px solid var(--rule);border-radius:4px;background:var(--card);line-height:1.4}
-.flow li:not(:last-child)::after{content:"";flex:0 0 1.1rem;height:2px;background:var(--sub);margin:0 .15rem;position:relative}
-.flow li:not(:last-child){position:relative}
-.flow li:not(:last-child)::before{content:"";position:absolute;right:.15rem;top:50%;width:0;height:0;border-left:6px solid var(--sub);border-top:5px solid transparent;border-bottom:5px solid transparent;transform:translateY(-50%)}
-.flow .plus .node{background:var(--tint);border:2px solid var(--ai);color:var(--ai);flex:1.3}
-.flow .plus{flex:1.3 1 0}
-.flow .node small{display:block;font-weight:400;font-size:.76rem;color:var(--sub);margin-top:.2rem}
-.flow .plus .node small{color:var(--ai)}
-.flow .last::after,.flow .last::before{display:none}
-.flow .plus{position:relative;padding-left:1.1rem;margin-left:.6rem;border-left:2px dashed var(--sub)}
-.flow .plus .mark{position:absolute;left:-.1rem;top:-1.35rem;font-size:.72rem;color:var(--sub);white-space:nowrap;transform:translateX(-50%)}
-.flow p{font-size:.88rem;color:var(--sub);margin:.7rem 0 0}
-@media (max-width:42rem){
-  .flow ol{flex-wrap:wrap;gap:.5rem .2rem}
-  .flow li{flex:0 0 calc(33.33% - .2rem)}
-  .flow .plus{flex:0 0 100%;border-left:0;margin-left:0;padding-left:0;border-top:2px dashed var(--sub);padding-top:1.3rem;margin-top:.4rem}
-  .flow .plus .mark{left:0;top:.2rem;transform:none}
-}
-@media (max-width:42rem){
-  .flowhead{display:none}
-  .steps{grid-template-columns:1fr;gap:.45rem}
-  .steps b{display:block;font-size:.78rem;color:var(--sub);margin-bottom:.1rem}
-  .steps p:last-child b{color:var(--ai)}
-}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>樋口 隆史（ひぐち たかし）｜FDE ポートフォリオ・経歴</title>
+  <style>
+    :root {
+      --primary: #1e3a5f;
+      --accent: #0f766e;
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --surface: #f1f5f9;
+      --border: #cbd5e1;
+      --text: #0f172a;
+      --muted: #475569;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Yu Gothic", -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 16px;
+    }
+    a {
+      color: var(--primary);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    a:hover { color: var(--accent); }
+    .container {
+      max-width: 1020px;
+      margin: 0 auto;
+      padding: 36px 20px 64px;
+    }
+    header.hero {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-top: 5px solid var(--primary);
+      border-radius: 10px;
+      padding: 28px 30px;
+      margin-bottom: 28px;
+    }
+    .hero-top {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    h1 {
+      margin: 0;
+      font-size: 1.75rem;
+      color: var(--primary);
+    }
+    .location {
+      font-size: 0.95rem;
+      color: var(--muted);
+      font-weight: 600;
+    }
+    .catchcopy {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin: 8px 0 12px;
+      color: var(--text);
+    }
+    .pillars {
+      background: var(--surface);
+      border-left: 4px solid var(--accent);
+      padding: 12px 16px;
+      border-radius: 6px;
+      margin: 14px 0 18px;
+      font-size: 0.96rem;
+    }
+    .badge-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 6px;
+      font-size: 0.94rem;
+    }
+    .badge-list li::before {
+      content: "▪ ";
+      color: var(--accent);
+      font-weight: 700;
+    }
+    .nav-links {
+      margin-top: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 0.92rem;
+    }
+    .nav-links a {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .nav-links a:hover {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+    section {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 24px 28px;
+      margin-bottom: 24px;
+    }
+    h2 {
+      margin: 0 0 14px;
+      font-size: 1.3rem;
+      color: var(--primary);
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--surface);
+    }
+    h3 {
+      margin: 18px 0 10px;
+      font-size: 1.08rem;
+      color: var(--primary);
+    }
+    .section-note {
+      font-size: 0.92rem;
+      color: var(--muted);
+      margin: 0 0 14px;
+    }
+    .flow-steps {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 14px 0 10px;
+    }
+    .flow-step {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 6px 12px;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+    .flow-step.highlight {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+    .table-wrap {
+      overflow-x: auto;
+      margin: 12px 0;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 680px;
+      font-size: 0.92rem;
+    }
+    th, td {
+      border: 1px solid var(--border);
+      padding: 10px 12px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      background: var(--primary);
+      color: #ffffff;
+      font-weight: 600;
+    }
+    tbody tr:nth-child(even) { background: var(--surface); }
+    .repo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 14px;
+      margin-top: 12px;
+    }
+    .repo-card {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 16px;
+      background: #ffffff;
+    }
+    .repo-card.featured {
+      border-left: 4px solid var(--accent);
+      background: #f8fafc;
+    }
+    .repo-title {
+      font-weight: 700;
+      font-size: 1rem;
+      margin-bottom: 6px;
+    }
+    .repo-tag {
+      display: inline-block;
+      font-size: 0.78rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1px 6px;
+      margin-right: 4px;
+      color: var(--muted);
+    }
+    .repo-desc {
+      font-size: 0.9rem;
+      margin: 8px 0 0;
+      color: var(--text);
+    }
+    details {
+      margin-top: 14px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 10px 14px;
+      background: var(--surface);
+    }
+    summary {
+      cursor: pointer;
+      font-weight: 700;
+      color: var(--primary);
+      font-size: 0.95rem;
+    }
+    footer {
+      text-align: center;
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin-top: 32px;
+    }
+  </style>
 </head>
 <body>
+  <div class="container">
+    <header class="hero">
+      <div class="hero-top">
+        <h1>樋口 隆史（ひぐち たかし）</h1>
+        <span class="location">福岡｜GitHub: <a href="https://github.com/takashi-101">takashi-101</a></span>
+      </div>
+      <p class="catchcopy">現場の聞き取りから要件を定め、担当者が替わっても業務が回る仕組みづくりまで。</p>
+      <div class="pillars">
+        <strong>強みの軸：</strong>教育設計（実務教育学修士・教育CIO）× 評価・データ（認定評価士・Python）× セキュリティ境界実装（FDE検定・閉域AI）により、現場の抵抗を抑えながら定着・再現性まで伴走する。
+      </div>
+      <ul class="badge-list">
+        <li>2026年9月　日本FDE協会 入会</li>
+        <li>2026年9月　<a href="https://www.iotcert.org/fdekentei/">FDE検定（IoT検定制度委員会）</a>レベル1 アソシエイト合格（合格番号：FDEA0000016／第0回ベータ試験・合格基準80点以上／第1回本試験合格相当）</li>
+        <li>2025年7月　AWS Emerging Talent Community 招待</li>
+        <li>保有資格・学位：デジタル推進委員（デジタル庁任命）／AI業務支援士／生成AIパスポート／2級ファイナンシャル・プランニング技能士／社会教育士／実務教育学修士（専門職）</li>
+      </ul>
+      <nav class="nav-links" aria-label="ページ内ナビゲーション">
+        <a href="#fde">FDEの型</a>
+        <a href="#repos">公開リポジトリ・実装</a>
+        <a href="#university">私立大学職員時代（24年）</a>
+        <a href="#public">行政・地域・個人（2025年〜）</a>
+        <a href="#certs">第三者検証可能な修了証</a>
+      </nav>
+    </header>
 
-<div class="wrap">
-<header>
-  <p class="name">樋口 隆史（ひぐち たかし）　福岡</p>
-  <h1><span>現場の聞き取りから要件を定め、</span><br><span>担当者が替わっても</span><span>業務が回る仕組みづくりまで。</span></h1>
-  <p class="lead">現場の困りごとを丁寧に聞き取って課題を見極め、生成AIを業務に組み込み、手順として残して引き継ぎます。</p>
-  <div class="about">
-    <p><b>FDE（Forward Deployed Engineer）とは</b>　顧客の現場に入り、業務の設計から仕組みづくり、定着、成果の展開までを担う役割です。米国のパランティア（Palantir Technologies）が、技術者を顧客の現場に直接送り込む職種として始めたものです。国内では、IoT検定制度委員会が2026年6月に国内初のFDE検定制度の構想を発表し、9月に試験の評価基準を公開してベータ試験を始めました。同委員会は、現場への定着と、成果を再現できる形で組織全体へ広げることを、FDEに欠かせない責任範囲としています。</p>
-  </div>
-  <ul class="fde">
-    <li>2026年9月　日本FDE協会の会員になりました。</li>
-    <li>2026年9月　FDE検定（IoT検定制度委員会）で、試験の内容や合否基準の妥当性を確かめるためのベータ試験（対象約100名）に、複数回の案内を受けて参加し、レベル1 アソシエイトに合格しました（合格番号 <a href="https://tcert.co/xH1DLiewQ9">FDEA0000016</a>）。</li>
-  </ul>
-  <p class="roles">デジタル推進委員（デジタル庁任命）／AI業務支援士／生成AIパスポート／実務教育学修士（専門職）</p>
-</header>
+    <section id="fde">
+      <h2>FDE（Forward Deployed Engineer）としての役割と型</h2>
+      <p>FDEは、顧客の現場に入り込み、業務の設計から仕組みづくり、定着、成果の展開までを一気通貫で担う職種です（Palantir Technologies発祥）。国内でもIoT検定制度委員会が2026年6月にFDE検定制度を発表し、現場定着と再現可能な展開をFDEの責任範囲としています。</p>
+      <div class="flow-steps">
+        <span class="flow-step">1. 要件定義</span>
+        <span class="flow-step">2. 設計</span>
+        <span class="flow-step">3. 試作</span>
+        <span class="flow-step">4. 試行運用</span>
+        <span class="flow-step">5. 定着</span>
+        <span class="flow-step highlight">＋ 6. 再現性（担当者が替わっても回る）</span>
+      </div>
+      <p class="section-note">※守秘義務および個人情報保護の観点から、公開ページ上の固有名詞（個人名・学校名・取引先名等）および非公開の財務数値は一般化・割合表記としています。</p>
+    </section>
 
-<section class="flow" aria-label="仕事の進め方">
-  <ol>
-    <li><span class="node">要件定義</span></li>
-    <li><span class="node">設計</span></li>
-    <li><span class="node">試作</span></li>
-    <li><span class="node">試行運用</span></li>
-    <li class="last"><span class="node">定着<small>組織と個人に</small></span></li>
-    <li class="plus"><span class="mark">通常はここまで</span><span class="node">＋ 再現性<small>担当者が替わっても回る</small></span></li>
-  </ol>
-  <p>定着させたうえで、手順として残し、担当者が替わっても同じ結果が出る状態にして引き継ぎます。下の各取り組みの右端の欄が、その結果です。</p>
-</section>
-</div>
+    <section id="repos">
+      <h2>公開リポジトリ・技術実装（GitHub）</h2>
+      <p class="section-note">「閉域・個人情報保護」「AIの精度検証（Evals）」「現場が自走できる仕組み化」をテーマに、Python・標準ライブラリ中心で検証可能な形で公開しています。</p>
+      <div class="repo-grid">
+        <div class="repo-card featured">
+          <div class="repo-title"><a href="https://github.com/takashi-101/pii-guard-gateway">pii-guard-gateway</a></div>
+          <span class="repo-tag">Python</span><span class="repo-tag">PIIマスク</span><span class="repo-tag">監査ログ</span>
+          <p class="repo-desc">外部AI・ローカルLLMへ渡す前に氏名・電話・メール・個人番号・金額を自動マスクし、生データを残さずSHA-256ハッシュチェーンで改ざん検知付き監査ログを記録するゲートウェイ。</p>
+        </div>
+        <div class="repo-card featured">
+          <div class="repo-title"><a href="https://github.com/takashi-101/fde-hybrid-router">fde-hybrid-router</a></div>
+          <span class="repo-tag">SQLite/DB</span><span class="repo-tag">Trust Boundary</span><span class="repo-tag">HITL</span>
+          <p class="repo-desc">公開情報はクラウドLLM、個人情報・内部情報はマスクして閉域ローカルLLMへ自動振り分け。インジェクション検知時は遮断し、低確信度・高リスク案件はDBの人間レビューキューへ送る基盤。</p>
+        </div>
+        <div class="repo-card featured">
+          <div class="repo-title"><a href="https://github.com/takashi-101/fde-eval-harness">fde-eval-harness</a></div>
+          <span class="repo-tag">Evals</span><span class="repo-tag">AI FinOps</span>
+          <p class="repo-desc">必須キーワード・禁止語・JSONスキーマ準拠・推定トークンコスト（円換算）を0円モックで一括検証する回帰評価ハーネス。</p>
+        </div>
+        <div class="repo-card">
+          <div class="repo-title"><a href="https://github.com/takashi-101/fde-ops-doctor">fde-ops-doctor</a></div>
+          <span class="repo-tag">運用引き継ぎ</span><span class="repo-tag">自己診断</span>
+          <p class="repo-desc">非エンジニアの現場担当者が、Python環境・容量・設定ファイル・SQLite整合性をワンコマンドで一次切り分けできる診断ツール。</p>
+        </div>
+        <div class="repo-card">
+          <div class="repo-title"><a href="https://github.com/takashi-101/fde-saas-webhook-bridge">fde-saas-webhook-bridge</a></div>
+          <span class="repo-tag">SaaS連携</span><span class="repo-tag">冪等性/DLQ</span>
+          <p class="repo-desc">kintone等の外部Webhook連携におけるスキーマ検証・冪等性キーによる二重処理防止・リトライ・DLQ隔離を担うアダプタ。</p>
+        </div>
+        <div class="repo-card">
+          <div class="repo-title"><a href="https://github.com/takashi-101/fde-rag-chunk-auditor">fde-rag-chunk-auditor</a></div>
+          <span class="repo-tag">RAG品質</span><span class="repo-tag">境界監査</span>
+          <p class="repo-desc">規程文書やマニュアルのRAG分割時に条文・文の途中切断（コンテキスト欠損）を定量検知する監査ツール。</p>
+        </div>
+        <div class="repo-card">
+          <div class="repo-title"><a href="https://github.com/takashi-101/fde-prompt-version-registry">fde-prompt-version-registry</a></div>
+          <span class="repo-tag">版管理</span><span class="repo-tag">回帰判定</span>
+          <p class="repo-desc">プロンプトのSHA-256ハッシュと評価スコアを紐づけ、更新時の品質低下（デグレード）を自動判定するレジストリ。</p>
+        </div>
+        <div class="repo-card">
+          <div class="repo-title"><a href="https://github.com/takashi-101/fde-csv-schema-validator">fde-csv-schema-validator</a></div>
+          <span class="repo-tag">データ連携</span><span class="repo-tag">前処理</span>
+          <p class="repo-desc">業務CSVの重複ID・欠損・和暦/スラッシュ混在日付をAI処理前に検疫・正規化する前処理バリデータ。</p>
+        </div>
+        <div class="repo-card">
+          <div class="repo-title"><a href="https://github.com/takashi-101/fde-cost-quota-guard">fde-cost-quota-guard</a></div>
+          <span class="repo-tag">AI FinOps</span><span class="repo-tag">予算制御</span>
+          <p class="repo-desc">部署・案件単位の月次API予算（円上限）をローカル管理し、上限到達時に実行を自動停止するコスト制御ガード。</p>
+        </div>
+        <div class="repo-card">
+          <div class="repo-title"><a href="https://github.com/takashi-101/fde-handover-runbook-gen">fde-handover-runbook-gen</a></div>
+          <span class="repo-tag">運用定着</span><span class="repo-tag">手順書生成</span>
+          <p class="repo-desc">日次確認コマンド・連絡先・切り戻し手順の構造データから統一フォーマットの運用引き継ぎ書を自動生成するツール。</p>
+        </div>
+        <div class="repo-card">
+          <div class="repo-title"><a href="https://github.com/takashi-101/local-llm-record">local-llm-record</a></div>
+          <span class="repo-tag">閉域LLM</span><span class="repo-tag">Evals</span>
+          <p class="repo-desc">オフラインPC環境でのローカルLLM出力検収記録。全文入力方式とRAG方式をPython自動照合スクリプトで比較検証し、全出力とコードを公開。</p>
+        </div>
+        <div class="repo-card">
+          <div class="repo-title"><a href="https://github.com/takashi-101/fde-checklist">fde-checklist</a></div>
+          <span class="repo-tag">オフラインHTML</span><span class="repo-tag">導入標準化</span>
+          <p class="repo-desc">実測を土台にした閉域ローカルLLM導入の6フェーズ・24項目チェックリストおよびAI配置判定ツール（単一HTMLでオフライン動作）。</p>
+        </div>
+        <div class="repo-card">
+          <div class="repo-title"><a href="https://github.com/takashi-101/readonly-mcp">readonly-mcp</a></div>
+          <span class="repo-tag">MCP</span><span class="repo-tag">最小権限</span>
+          <p class="repo-desc">共通規格であるMCPの横展開リスクを抑えるため、参照専用・対象スコープ限定でAIに安全に文書を読ませるMCPサーバー実装。</p>
+        </div>
+        <div class="repo-card">
+          <div class="repo-title"><a href="https://github.com/takashi-101/funding-guide">funding-guide</a></div>
+          <span class="repo-tag">Webアプリ</span><span class="repo-tag">AI FinOps</span>
+          <p class="repo-desc">AI導入・人材育成に使える公的制度（国27制度枠＋自治体1件）の探索と試算Webアプリ。回帰テスト13本・画面操作23項目を検証済み。</p>
+        </div>
+        <div class="repo-card">
+          <div class="repo-title"><a href="https://github.com/takashi-101/remove-keep-marks">remove-keep-marks</a></div>
+          <span class="repo-tag">PowerShell</span><span class="repo-tag">業務改善</span>
+          <p class="repo-desc">Word見出しに付く黒い点（段落設定）の不具合を原因から自動修復するPowerShellスクリプト。</p>
+        </div>
+      </div>
+    </section>
 
-<div class="wrap">
-<section>
-  <h2>私立大学職員時代</h2>
-  <p class="intro">私立大学の事務職員として24年。大学には案件ごとに体制や予算を組む仕組みがなく、どれも通常業務と並行して自分で立ち上げたものです。</p>
+    <section id="university">
+      <h2>私立大学職員時代（24年間）</h2>
+      <p class="section-note">大学組織はプロジェクト単位で体制や予算を組む仕組みがなく、定常業務の枠内で動くのが基本のため、以下の取り組みはいずれも通常業務と並行して自ら立ち上げた。</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 19%;">取り組み</th>
+              <th style="width: 24%;">要件定義</th>
+              <th style="width: 28%;">設計・実装</th>
+              <th style="width: 29%;">定着・再現性</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>学内印刷業務の収益事業化</strong><br>（2011年）</td>
+              <td>担当外の立場から、最低発注ロットの条件が余剰在庫と特定職員への業務集中を生んでいる構造をつかんだ</td>
+              <td>子会社の新規事業としてイニシャル・ランニングコストをゼロベースで検討し、遊休スペースへ外部専門事業者を誘致する契約モデルを設計して設立</td>
+              <td>直接関与できないため必要な事項を引き継ぎ間接的な関与に留め、以降は子会社単独で自走。大学本体の持ち出しゼロで長期黒字事業（累計10億円超規模）となり、首都圏の私立大学でも同モデルを開始（2013年）</td>
+            </tr>
+            <tr>
+              <td><strong>最高意思決定機関への遠隔会議導入</strong><br>（2018年）</td>
+              <td>月1回の全学会議のため、授業・研究指導・外来が止まる全学的な稼働制約があった</td>
+              <td>最上位の会議体から導入し、5年回収計画で投資判断を確保。単年で導入</td>
+              <td>トラブル事例を画像付きの手順書にし、他部署が自ら利用を申し出た。1日4〜5件の会議で使われ、意思決定者からも投資回収済みとの評価を受領</td>
+            </tr>
+            <tr>
+              <td><strong>学内駐車場の利用区分再設計</strong><br>（2019年）</td>
+              <td>約30年続く赤字構造。許可枚数に根拠がなく、利用区分と実際の利用者が一致していなかった</td>
+              <td>天候や学内行事の条件別に巡回記録と目視で実態を計測。無許可利用は現場の権限者を通じて是正し、日勤と夜勤の重なりから許可枚数を算出</td>
+              <td>巡回記録が仕組みとして続き、追加投資なしで許可枚数を1.5倍へ拡大。長期の赤字構造から黒字へ転換した</td>
+            </tr>
+            <tr>
+              <td><strong>認証評価のオンライン実地調査</strong><br>（2020年度）</td>
+              <td>コロナ禍で、システム担当ではない自分が1人で会場を作り、集まることを嫌う教職員を集める必要があった</td>
+              <td>最も安定した基幹回線を選び、費用ゼロ・1日で自作。自ら学内の役職者と折衝し、感染対策責任者の出席を先に確保した上で不参加リスクを伝えて全学体制を構築</td>
+              <td>全日程トラブルゼロで「大学基準に適合」を獲得（執筆章から長所2件）。2020年度に学長から文化醸成を評価され、翌2021年度の自己点検・評価の回収期間も約2か月（60日）→約1週間（7日）に短縮</td>
+            </tr>
+            <tr>
+              <td><strong>生成AIによる窓口対応の標準化</strong><br>（2023年）</td>
+              <td>窓口対応が一部の係6名に偏り、昼休みも返上していた</td>
+              <td>選抜制WGの最優秀検証案として各係のマニュアルを統合し、12名全員で回答案を揃えた。他大学（国立大学）専門講師の外部レビューも経て、スプレッドシートに固定</td>
+              <td>2係12名全員が一次対応できる体制に移行。1日平均12〜15組の来訪のうち、二次対応は約2割まで減少</td>
+            </tr>
+            <tr>
+              <td><strong>生成AIとの分業による業務見直し</strong><br>（2023〜2024年）</td>
+              <td>AIに任せられる範囲と、人が最終責任を持つ範囲を切り分ける必要があった</td>
+              <td>業務の要件を整理してAIへ渡す工程と、人が照合・判断する工程を明確に分離して運用</td>
+              <td>1日の業務時間を半日に短縮（大学と行政の両現場で再現）。創出した時間で後進の業務を並走支援</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
 
-  <div class="flowhead" aria-hidden="true"><span>要件定義</span><span>設計・実装</span><span>定着・再現性</span></div>
+    <section id="public">
+      <h2>行政・地域・個人の現場へ（2025年〜）</h2>
+      <p class="section-note">退職後は行政・NPO・個人開発へ場を広げ、コードと全出力の公開によって検証可能な形で再現性を残しています。</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 19%;">取り組み</th>
+              <th style="width: 24%;">要件定義</th>
+              <th style="width: 28%;">設計・実装</th>
+              <th style="width: 29%;">定着・再現性</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>自治体への課題解決案の提供</strong><br>（県内自治体・2025年1月）</td>
+              <td>社会教育担当から業務課題を聞き取った</td>
+              <td>社会教育士として先行自治体の前例を生成AIで調査し、課題解決案のたたき台を作成</td>
+              <td>採用の有無を問わず、自治体側で自由に改変・再利用できるよう著作権を放棄して無償提供</td>
+            </tr>
+            <tr>
+              <td><strong>福岡市行政事務センターの滞留処理・標準化</strong><br>（2025年2〜3月）</td>
+              <td>開所後初の年度末で、照会業務1,176件が滞留。即時回答と応答待ち案件が混在し処理が止まっていた</td>
+              <td>案件を先に分類し、成果物から逆算する設計で処理を3段階へ組み替え、並行・一括処理により滞留分1,176件を130分で解消</td>
+              <td>通常運用向けの標準処理手順書（36項目・5工程）を整備し、平均処理時間5.0分→2.5分（29〜60%短縮）・誤出力0件を実現。庁内標準として登録</td>
+            </tr>
+            <tr>
+              <td><strong>デジタル推進委員向け講座</strong><br>（NPO法人・2026年9月）</td>
+              <td>受講者の多くはリタイア後のシニア。生活ですぐ使える題材を条件に設定</td>
+              <td>60分のオンライン講座を、結論から理由の順に組み、受講者に操作を求めない構成で設計</td>
+              <td>教材と動画が法人内で会員に共有された。質問には後日出典付きで「検証済み／未確認」を分けて回答</td>
+            </tr>
+            <tr>
+              <td><strong>閉域ローカルLLM検証と導入基盤</strong><br>（個人・2026年）</td>
+              <td>通信遮断環境で規程から守るべき事項を漏れなく抽出できるか、どう検収するかを課題設定</td>
+              <td>全文方式とRAG方式を比較し、Pythonで実行と照合を自動化。PIIマスク・信頼境界・HITLまで実装</td>
+              <td>コードと全出力をGitHub（<code>local-llm-record</code>、<code>fde-checklist</code>、<code>pii-guard-gateway</code>、<code>fde-hybrid-router</code>）で公開</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
 
-  <article class="case">
-    <h3>学内印刷業務の子会社移管<small>2011年</small></h3>
-    <div class="steps">
-      <p><b>要件定義</b>担当外の立場から、発注の条件が余剰在庫と特定の職員への業務集中を生んでいる構造をつかんだ</p>
-      <p><b>設計・実装</b>収益子会社へ移す案を提案し、採用されて設立</p>
-      <p><b>定着・再現性</b>提案者の手を離れて独立運営に。累計10億円超の収益事業になり、他大学も導入</p>
-    </div>
-  </article>
+    <section id="certs">
+      <h2>第三者が確認できる修了証・学習証跡</h2>
+      <p class="section-note">検証可能な外部バッジ・修了証の集約先：<a href="https://www.credly.com/users/takashi-higuchi.2d0eec27">Credly 公開プロフィール</a></p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 24%;">発行元</th>
+              <th style="width: 52%;">主な修了証・アセスメント（厳選）</th>
+              <th style="width: 24%;">確認先・時期</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Palantir Technologies</strong></td>
+              <td>Foundry &amp; AIP Builder Foundations / Agentic AIP Workflow / End-to-End Workflow / Scoping Use Cases（Speedrun 5件・Deep Dive 9件・Applied Notional Project 修了、バッジ18件）</td>
+              <td>Palantir Learn<br>（2026年10月）</td>
+            </tr>
+            <tr>
+              <td><strong>AWS</strong></td>
+              <td>Well-Architected Proficient / AWS Security Champion / Amazon Q Developer Fundamentals / Networking Core / Serverless（Knowledge Badge Assessment 合格）</td>
+              <td><a href="https://www.credly.com/users/takashi-higuchi.2d0eec27">Credly</a><br>（2025年5〜11月）</td>
+            </tr>
+            <tr>
+              <td><strong>OpenAI Academy</strong></td>
+              <td>AI Foundations / Applied AI Foundations / Agents and Workflows</td>
+              <td>OpenAI Academy</td>
+            </tr>
+            <tr>
+              <td><strong>Anthropic</strong></td>
+              <td>Claude Code in Action / Claude with the Anthropic API / Introduction to Model Context Protocol / MCP: Advanced Topics ほか</td>
+              <td>Anthropic</td>
+            </tr>
+            <tr>
+              <td><strong>IBM / Google（Coursera）</strong></td>
+              <td>IBM RAG and Agentic AI Professional Certificate V3 / IBM Generative AI Engineering / Google AI Professional Certificate / Google Cybersecurity V2</td>
+              <td><a href="https://www.credly.com/users/takashi-higuchi.2d0eec27">Credly</a> / Coursera<br>（2026年8〜11月）</td>
+            </tr>
+            <tr>
+              <td><strong>Microsoft Learn</strong></td>
+              <td>Azureアーキテクチャ（AZ-305/AZ-400関連）・セキュリティ（Entra ID / Purview / Defender）・AI Foundry・Copilot拡張・Power Platform関連ラーニングパス修了</td>
+              <td>Microsoft Learn<br>（2025年11月〜2026年10月）</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
-  <article class="case">
-    <h3>遠隔会議の導入<small>2018年</small></h3>
-    <div class="steps">
-      <p><b>要件定義</b>全学の会議のたびに、授業や研究指導が止まっていた</p>
-      <p><b>設計・実装</b>最上位の会議体から導入し、5年の回収計画で投資判断を得た</p>
-      <p><b>定着・再現性</b>トラブル事例を画像付きの手順書にし、他部署が自ら利用を申し出た。1日4〜5件の会議で使われる状態に</p>
-    </div>
-  </article>
-
-  <article class="case">
-    <h3>駐車場の利用区分の再設計<small>2019年</small></h3>
-    <div class="steps">
-      <p><b>要件定義</b>30年続く赤字。許可枚数に根拠がなく、利用区分と実際の利用者が一致していなかった</p>
-      <p><b>設計・実装</b>天候や行事などの条件別に利用の実態を測り、日勤と夜勤の重なりから許可枚数を算出</p>
-      <p><b>定着・再現性</b>巡回記録が仕組みとして続き、追加投資なしで許可枚数1.5倍、赤字から黒字へ</p>
-    </div>
-  </article>
-
-  <article class="case">
-    <h3>認証評価のオンライン実地調査<small>2020年</small></h3>
-    <div class="steps">
-      <p><b>要件定義</b>コロナ禍で、集まることを嫌う教職員を集め、会場を一人で作る必要があった</p>
-      <p><b>設計・実装</b>費用ゼロで会場を自作し、感染対策の責任者の出席を先に確保して全学の体制を組んだ</p>
-      <p><b>定着・再現性</b>全日程トラブルゼロ。少数で受けていた実地調査を全学参加型に変え、大学基準に適合</p>
-    </div>
-  </article>
-
-  <article class="case">
-    <h3>生成AIによる窓口対応の標準化<small>2023年</small></h3>
-    <div class="steps">
-      <p><b>要件定義</b>窓口対応が一部の6名に偏り、昼休みも返上していた</p>
-      <p><b>設計・実装</b>生成AIで各係のマニュアルを統合し、回答案を12名全員で確かめて、答えが割れる箇所を直した</p>
-      <p><b>定着・再現性</b>2係12名全員が一次対応できる体制に。二次対応は来訪者の約2割まで減少</p>
-    </div>
-  </article>
-
-  <article class="case">
-    <h3>生成AIとの分業による業務の見直し<small>2023〜2024年</small></h3>
-    <div class="steps">
-      <p><b>要件定義</b>AIに任せられる部分と、人が持つべき部分を分ける</p>
-      <p><b>設計・実装</b>AIに任せる部分を切り分け、最終責任は人が持つ型で運用</p>
-      <p><b>定着・再現性</b>1日の仕事が半日に。大学と福岡市役所の両方で再現</p>
-    </div>
-  </article>
-</section>
-
-<section>
-  <h2>行政と地域の現場へ（2025年〜）</h2>
-  <p class="intro">コードと全出力を公開し、誰でも同じ結果を確かめられる形で残しています。</p>
-
-  <div class="flowhead" aria-hidden="true"><span>要件定義</span><span>設計・実装</span><span>定着・再現性</span></div>
-
-  <article class="case">
-    <h3>太宰府市役所への課題解決案<small>2025年</small></h3>
-    <div class="steps">
-      <p><b>要件定義</b>太宰府市役所が抱えていた課題を聞き取った</p>
-      <p><b>設計・実装</b>同様の課題を解決した他の自治体の前例を付けて、解決案のたたき台を作成</p>
-      <p><b>定着・再現性</b>採用を求めず、使える部分を自由に使える形で無償提供</p>
-    </div>
-  </article>
-
-  <article class="case">
-    <h3>福岡市役所での滞留処理と手順の標準化<small>2025年</small></h3>
-    <div class="steps">
-      <p><b>要件定義</b>照会業務1,176件が滞留していた</p>
-      <p><b>設計・実装</b>業務の流れを3つに分け、並行して処理する形に組み直した</p>
-      <p><b>定着・再現性</b>標準処理手順書で平均処理時間を半分に、誤りは0件。庁内の標準として登録</p>
-    </div>
-  </article>
-
-  <article class="case">
-    <h3>デジタル推進委員向けの講座<small>2026年</small></h3>
-    <div class="steps">
-      <p><b>要件定義</b>受講者はシニアのデジタル推進委員。自分の生活ですぐ使える題材に絞る</p>
-      <p><b>設計・実装</b>60分のオンライン講座を、受講者に操作を求めない形で設計</p>
-      <p><b>定着・再現性</b>教材と動画が法人内で共有された。講座で出た質問には、後日出典を付けて回答</p>
-    </div>
-  </article>
-
-  <article class="case">
-    <h3>閉域環境での生成AIの検証と導入手順<small>2026年</small></h3>
-    <div class="steps">
-      <p><b>要件定義</b>ネットにつながないPCで、AIが規程から守るべき事項を漏れなく抜き出せるか。それをどう確かめるか</p>
-      <p><b>設計・実装</b>2つの方式を比べ、判定と照合を自動化。照合の誤判定は自分で見つけて直した</p>
-      <p><b>定着・再現性</b>コードと全出力を公開。その結果をもとに、導入の確認手順と、AIの置き場所の判定ツールも公開</p>
-    </div>
-  </article>
-</section>
-</div>
-
-<div class="wrap narrow">
-<section>
-  <h2>Palantir Learn</h2>
-  <p>2026年10月24日、Foundry・AIP の Speedrun 5件と Deep Dive 9件をすべて修了し、Applied Notional Project を完了しました（修了バッジ18件）。照会例：<a href="https://verify.skilljar.com/c/uri2mxcyfmts">uri2mxcyfmts</a></p>
-</section>
-
-<section>
-  <h2>公開しているもの</h2>
-  <ul class="works">
-    <li><a href="https://github.com/takashi-101/local-llm-record">local-llm-record</a>閉域環境での生成AIの出力検証の記録</li>
-    <li><a href="https://github.com/takashi-101/fde-checklist">fde-checklist</a>閉域での導入の確認手順と、AIの置き場所の判定ツール</li>
-    <li><a href="https://github.com/takashi-101/funding-guide">funding-guide</a>AI導入と人材育成に使える公的制度の探索と試算</li>
-    <li><a href="https://github.com/takashi-101/readonly-mcp">readonly-mcp</a>AIに決まった文書だけを安全に読ませる仕組み</li>
-    <li><a href="https://github.com/takashi-101/remove-keep-marks">remove-keep-marks</a>Word文書の書式の不具合を原因から直すスクリプト</li>
-  </ul>
-</section>
-
-<section>
-  <h2>第三者が確認できる修了証</h2>
-  <div class="tbl">
-  <table>
-    <thead><tr><th>発行元</th><th>名称</th><th>確認先</th></tr></thead>
-    <tbody>
-<!-- 確認先のURLが入ったら、コメントを外して表に戻す
-      <tr><td>生成AI活用普及協会</td><td>生成AIパスポート（2023年10月）</td><td>オープンバッジ</td></tr>
-      <tr><td>IT整備士協会</td><td>AI業務支援士（2026年7月）</td><td>オープンバッジ</td></tr>
-            <tr><td>AWS</td><td>Security Champion</td><td>Credly</td></tr>
--->
-      <tr><td>Palantir Technologies</td><td>Foundry &amp; AIP Builder Foundations</td><td><a href="https://verify.skilljar.com/c/uri2mxcyfmts">uri2mxcyfmts</a></td></tr>
-      <tr><td>Palantir Technologies</td><td>Speedrun: Your First Agentic AIP Workflow</td><td><a href="https://verify.skilljar.com/c/wpfcqyvznoie">wpfcqyvznoie</a></td></tr>
-      <tr><td>Palantir Technologies</td><td>Speedrun: Your First End-to-End Workflow</td><td><a href="https://verify.skilljar.com/c/yksgsqyggj57">yksgsqyggj57</a></td></tr>
-      <tr><td>Palantir Technologies</td><td>Scoping Use Cases for Foundry &amp; AIP</td><td><a href="https://verify.skilljar.com/c/zmh4myyd8k3y">zmh4myyd8k3y</a></td></tr>
-      <tr><td>OpenAI Academy</td><td>AI Foundations（修了証）</td><td><a href="https://academy.openai.com/public/certificate/8dfutha53o">8dfutha53o</a></td></tr>
-      <tr><td>OpenAI Academy</td><td>Applied AI Foundations（修了証）</td><td><a href="https://academy.openai.com/public/certificate/i2ejlkasw4">i2ejlkasw4</a></td></tr>
-      <tr><td>OpenAI Academy</td><td>Agents and Workflows（修了証）</td><td><a href="https://academy.openai.com/public/certificate/uhekl6rpw0">uhekl6rpw0</a></td></tr>
-      <tr><td>IBM（Coursera）</td><td>IBM RAG and Agentic AI Professional Certificate V3（2026年11月）</td><td><a href="https://www.credly.com/badges/3baa9254-f73c-4769-9448-77fb24473c1d">Credly</a></td></tr>
-      <tr><td>IBM（Coursera）</td><td>IBM Generative AI Engineering Professional Certificate（2026年11月）</td><td><a href="https://www.credly.com/badges/7364adab-8350-4eef-b94c-94e8dc659570">Credly</a></td></tr>
-      <tr><td>IBM（Coursera）</td><td>IBM AI Developer Professional Certificate（2026年11月）</td><td><a href="https://coursera.org/verify/professional-cert/EVOJO156B4DD">Coursera</a></td></tr>
-      <tr><td>IBM（Coursera）</td><td>IBM IT Systems Administration and Cloud Operations Professional Certificate（2026年11月）</td><td><a href="https://coursera.org/verify/professional-cert/R0UQAPOVDB9Z">Coursera</a></td></tr>
-      <tr><td>Google（Coursera）</td><td>Generative AI Leader Professional Certificate（2026年10月）</td><td><a href="https://coursera.org/verify/professional-cert/8MZPU6931BCZ">Coursera</a></td></tr>
-      <tr><td>Google（Coursera）</td><td>Google AI Professional Certificate（2026年8月）</td><td><a href="https://coursera.org/verify/professional-cert/H9FY7ZPABIVQ">Coursera</a></td></tr>
-      <tr><td>Google（Coursera）</td><td>Google Cybersecurity Professional Certificate(v.2)（2026年11月）</td><td><a href="https://www.credly.com/badges/90bbb775-f9b8-4aef-bc24-1ed7c67d17e4">Credly</a></td></tr>
-      <tr><td>Anthropic</td><td>Claude Code in Action</td><td><a href="https://verify.skilljar.com/c/53iz7cz2u65x">53iz7cz2u65x</a></td></tr>
-      <tr><td>Anthropic</td><td>Claude with the Anthropic API</td><td><a href="https://verify.skilljar.com/c/xcpjvyndrvd5">xcpjvyndrvd5</a></td></tr>
-      <tr><td>Anthropic</td><td>Claude with Amazon Bedrock</td><td><a href="https://verify.skilljar.com/c/ehgb8v65eamz">ehgb8v65eamz</a></td></tr>
-      <tr><td>Anthropic</td><td>Claude with Google Vertex AI</td><td><a href="https://verify.skilljar.com/c/neh8xspsqzyx">neh8xspsqzyx</a></td></tr>
-      <tr><td>Anthropic</td><td>Introduction to Model Context Protocol</td><td><a href="https://verify.skilljar.com/c/f4mh7a6yywz4">f4mh7a6yywz4</a></td></tr>
-      <tr><td>Anthropic</td><td>Model Context Protocol: Advanced Topics</td><td><a href="https://verify.skilljar.com/c/gqjh45tamjd8">gqjh45tamjd8</a></td></tr>
-      <tr><td>AWS</td><td>Well-Architected Proficient（2025年5月）</td><td><a href="https://www.credly.com/badges/02e7928f-cf12-4e2e-83c3-d47b12386eb8">Credly</a></td></tr>
-    </tbody>
-  </table>
-  </div>
+      <details>
+        <summary>その他の修了講座一覧（Coursera 専門講座25件・LinkedIn Learning 23件）</summary>
+        <ul>
+          <li><strong>Coursera Specialization（25件）</strong>：IBM Generative AI（Engineering with LLMs / Building AI Agents / RAG / BI / Data Engineering / Cybersecurity 等 23件）、Google AI Essentials / Prompting Essentials（2件）</li>
+          <li><strong>LinkedIn Learning（23件）</strong>：Snowflake（Data Engineering / GenAI）、ServiceNow IT Leadership、Docker Foundations、Microsoft Azure AI / Security / Copilot 関連ほか</li>
+        </ul>
   <h3>Courseraで修了した専門講座（Specialization）25件</h3>
-  <div class="tbl">
+  <div class="table-wrap">
   <table>
     <thead><tr><th>発行元</th><th>名称</th><th>確認先</th></tr></thead>
     <tbody>
@@ -326,7 +538,7 @@ footer{margin:4rem 0 3rem;padding-top:1rem;border-top:1px solid var(--rule);font
   </table>
   </div>
   <h3>LinkedIn Learningで取得した修了証23件</h3>
-  <div class="tbl">
+  <div class="table-wrap">
   <table>
     <thead><tr><th>発行元</th><th>名称</th><th>確認先</th></tr></thead>
     <tbody>
@@ -356,12 +568,12 @@ footer{margin:4rem 0 3rem;padding-top:1rem;border-top:1px solid var(--rule);font
     </tbody>
   </table>
   </div>
-</section>
+      </details>
+    </section>
 
-<footer>
-  <p>GitHub：<a href="https://github.com/takashi-101">takashi-101</a></p>
-</footer>
-</div>
-
+    <footer>
+      樋口 隆史｜<a href="https://github.com/takashi-101">GitHub</a>｜<a href="https://www.credly.com/users/takashi-higuchi.2d0eec27">Credly</a>
+    </footer>
+  </div>
 </body>
 </html>
