@@ -118,20 +118,35 @@
   <h2>公開しているもの</h2>
   <ul class="lines">
     <li><a href="https://github.com/takashi-101/jissoku-agent"><b>jissoku-agent</b></a><br>業務量の実測データを分析するAIエージェント。数値はAIに書かせず指標IDで参照させ、指標の取り違えまで検出する</li>
+    <li><a href="https://github.com/takashi-101/fde-hybrid-router"><b>fde-hybrid-router</b></a><br>機密区分で問い合わせを振り分けるルーター。個人情報を含むものはマスキングしてローカルLLM（Ollama）に送る。クラウド側は差し替え口と見本</li>
     <li><a href="https://github.com/takashi-101/mcp-tool-lock"><b>mcp-tool-lock</b></a><br>AIが使う道具（MCP）の説明に仕込まれた指示と、承認後の書き換えを見つけるツール</li>
     <li><a href="https://github.com/takashi-101/agent-ledger"><b>agent-ledger</b></a><br>使われているAIエージェントの道具を台帳にし、危ない設定に印を付けるツール</li>
     <li><a href="https://github.com/takashi-101/agent-trace-review"><b>agent-trace-review</b></a><br>AIエージェントの行動記録から、人の承認を経ない書き込み・送信や暴走を見つけるツール</li>
-    <li><a href="https://github.com/takashi-101/local-llm-record"><b>local-llm-record</b></a><br>閉域環境での生成AIの出力検証の記録（コードと全出力）</li>
-    <li><a href="https://github.com/takashi-101/fde-checklist"><b>fde-checklist</b></a><br>閉域での導入の確認手順と、AIの置き場所の判定ツール</li>
-    <li><a href="https://github.com/takashi-101/ai-decision-audit"><b>ai-decision-audit</b></a><br>AIへの依頼文と出力を並べ、依頼に無いのにAIが決めたことに印を付けて、採るか採らないかを記録するツール</li>
-    <li><a href="https://github.com/takashi-101/gyomu-tanaoroshi"><b>gyomu-tanaoroshi</b></a>　<a href="https://takashi-101.github.io/gyomu-tanaoroshi/">画面を開く</a><br>自治体の事務職場向けの業務棚卸し・事務引継ぎ記録ツール（ネットにつながないPCでも動作）</li>
+    <li><a href="https://github.com/takashi-101/fde-eval-harness"><b>fde-eval-harness</b></a><br>fde-hybrid-router とローカルLLMを架空の13件で評価し、結果をRESULTS.mdに記録した評価ハーネス</li>
+    <li><a href="https://github.com/takashi-101/pii-guard-gateway"><b>pii-guard-gateway</b></a><br>AIへ渡す前に氏名・電話・メール・個人番号・住所・金額を目印に置き換え、改ざんに気づける監査ログを残す前処理（検出できない範囲も明記）</li>
+    <li><a href="https://github.com/takashi-101/fde-saas-webhook-bridge"><b>fde-saas-webhook-bridge</b></a><br>Webhookの汎用の受信サーバー。署名検証・二重処理の防止・再試行・DLQ（処理できなかった通知の退避先）を1コマンドのデモで確かめられる</li>
+    <li><a href="https://github.com/takashi-101/readonly-mcp"><b>readonly-mcp</b></a><br>AIに決まった文書だけを安全に読ませる仕組み</li>
     <li><a href="https://github.com/takashi-101/ittsukan-tool"><b>ittsukan-tool</b></a>　<a href="https://takashi-101.github.io/ittsukan-tool/">画面を開く</a><br>要件定義から定着までの7工程を1本で通して扱うツール（詰まっている工程だけでも使える）</li>
     <li><a href="https://github.com/takashi-101/madoguchi-kaito"><b>madoguchi-kaito</b></a>　<a href="https://takashi-101.github.io/madoguchi-kaito/">画面を開く</a><br>マニュアルや例規の原文を根拠に、窓口・庁内の問い合わせへの回答をそろえるツール</li>
     <li><a href="https://github.com/takashi-101/shinsei-fubi-check"><b>shinsei-fubi-check</b></a>　<a href="https://takashi-101.github.io/shinsei-fubi-check/">画面を開く</a><br>申請書の記載漏れ・書式の誤り・添付書類の不足を、受付の時点で確かめるツール</li>
+    <li><a href="https://github.com/takashi-101/local-llm-record"><b>local-llm-record</b></a><br>閉域環境での生成AIの出力検証の記録（コードと全出力）</li>
+    <li><a href="https://github.com/takashi-101/gennai-oss-closed-port"><b>gennai-oss-closed-port</b></a><br>デジタル庁の源内OSSとローカルLLMを、メモリ16GB・GPUなしのノートPC1台で動かした記録</li>
+    <li><a href="https://github.com/takashi-101/fde-checklist"><b>fde-checklist</b></a><br>閉域での導入の確認手順と、AIの置き場所の判定ツール</li>
+    <li><a href="https://github.com/takashi-101/ai-decision-audit"><b>ai-decision-audit</b></a><br>AIへの依頼文と出力を並べ、依頼に無いのにAIが決めたことに印を付けて、採るか採らないかを記録するツール</li>
+    <li><a href="https://github.com/takashi-101/gyomu-tanaoroshi"><b>gyomu-tanaoroshi</b></a>　<a href="https://takashi-101.github.io/gyomu-tanaoroshi/">画面を開く</a><br>自治体の事務職場向けの業務棚卸し・事務引継ぎ記録ツール（ネットにつながないPCでも動作）</li>
     <li><a href="https://github.com/takashi-101/scs-star3-selfcheck"><b>scs-star3-selfcheck</b></a>　<a href="https://takashi-101.github.io/scs-star3-selfcheck/">画面を開く</a><br>SCS評価制度★3の自己点検ツール（外部への通信なし）</li>
     <li><a href="https://github.com/takashi-101/funding-guide"><b>funding-guide</b></a><br>AI導入と人材育成に使える公的制度の探索と試算</li>
-    <li><a href="https://github.com/takashi-101/readonly-mcp"><b>readonly-mcp</b></a><br>AIに決まった文書だけを安全に読ませる仕組み</li>
+    <li><a href="https://github.com/takashi-101/palantir-applied-notional-project"><b>palantir-applied-notional-project</b></a>　<a href="https://takashi-101.github.io/palantir-applied-notional-project/">画面を開く</a><br>Palantir Learn の実践課題を、ブラウザだけで動く1枚のページで作った成果物（データの掃除・車両一覧・不具合の受付箱）</li>
     <li><a href="https://github.com/takashi-101/remove-keep-marks"><b>remove-keep-marks</b></a><br>Word文書の書式の不具合を原因から直すスクリプト</li>
+  </ul>
+  <h3>現場で使う小さな道具</h3>
+  <ul class="lines">
+    <li><a href="https://github.com/takashi-101/fde-ops-doctor"><b>fde-ops-doctor</b></a><br>Pythonの版・空き容量・設定ファイル・SQLiteの整合性を1コマンドで確かめる、運用の一次切り分けツール</li>
+    <li><a href="https://github.com/takashi-101/fde-rag-chunk-auditor"><b>fde-rag-chunk-auditor</b></a><br>文書を決まった文字数で分割し、文の途中で切れたチャンクの数を数える点検ツール</li>
+    <li><a href="https://github.com/takashi-101/fde-prompt-version-registry"><b>fde-prompt-version-registry</b></a><br>プロンプトを版ごとに内容のハッシュと評価スコアつきで記録し、2つの版のスコアを比べる</li>
+    <li><a href="https://github.com/takashi-101/fde-csv-schema-validator"><b>fde-csv-schema-validator</b></a><br>業務CSVのID列の欠損・重複と、日付の表記を確かめる前処理</li>
+    <li><a href="https://github.com/takashi-101/fde-cost-quota-guard"><b>fde-cost-quota-guard</b></a><br>見積額と台帳の合計が上限を超えるかを判定する、予算の台帳</li>
+    <li><a href="https://github.com/takashi-101/fde-handover-runbook-gen"><b>fde-handover-runbook-gen</b></a><br>日次確認コマンド・連絡先・切り戻し手順から、決まった形の運用引き継ぎ書（Markdown）を作る</li>
   </ul>
 </section>
 

@@ -276,9 +276,9 @@
       <p class="section-note">「閉域・個人情報保護」「AIの精度検証（Evals）」「現場が自走できる仕組み化」をテーマに、Python・標準ライブラリ中心で検証可能な形で公開しています。</p>
       <div class="repo-grid">
         <div class="repo-card featured">
-          <div class="repo-title"><a href="https://github.com/takashi-101/pii-guard-gateway">pii-guard-gateway</a></div>
-          <span class="repo-tag">Python</span><span class="repo-tag">PIIマスク</span><span class="repo-tag">監査ログ</span>
-          <p class="repo-desc">外部AI・ローカルLLMへ渡す前に氏名・電話・メール・個人番号・金額を自動マスクし、生データを残さずSHA-256ハッシュチェーンで改ざん検知付き監査ログを記録するゲートウェイ。</p>
+          <div class="repo-title"><a href="https://github.com/takashi-101/jissoku-agent">jissoku-agent</a></div>
+          <span class="repo-tag">LangGraph</span><span class="repo-tag">MCP</span>
+          <p class="repo-desc">業務量の実測データを分析するAIエージェント。LLMには数値を書かせず指標IDで参照させ、指標の取り違えまで検出する（LangGraph・MCP・ローカルLLM）</p>
         </div>
         <div class="repo-card featured">
           <div class="repo-title"><a href="https://github.com/takashi-101/fde-hybrid-router">fde-hybrid-router</a></div>
@@ -286,19 +286,107 @@
           <p class="repo-desc">公開情報はクラウドLLM、個人情報・内部情報はマスクして閉域ローカルLLMへ自動振り分け。インジェクション検知時は遮断し、低確信度・高リスク案件はDBの人間レビューキューへ送る基盤。</p>
         </div>
         <div class="repo-card featured">
+          <div class="repo-title"><a href="https://github.com/takashi-101/mcp-tool-lock">mcp-tool-lock</a></div>
+          <span class="repo-tag">MCP</span><span class="repo-tag">セキュリティ</span>
+          <p class="repo-desc">AIが使う道具（MCP）の説明に仕込まれた指示と、承認後の書き換えを見つけるツール</p>
+        </div>
+        <div class="repo-card">
+          <div class="repo-title"><a href="https://github.com/takashi-101/agent-ledger">agent-ledger</a></div>
+          <span class="repo-tag">MCP</span><span class="repo-tag">台帳</span>
+          <p class="repo-desc">使われているAIエージェントの道具を台帳にし、危ない設定に印を付けるツール</p>
+        </div>
+        <div class="repo-card">
+          <div class="repo-title"><a href="https://github.com/takashi-101/agent-trace-review">agent-trace-review</a></div>
+          <span class="repo-tag">OpenTelemetry</span><span class="repo-tag">HITL</span>
+          <p class="repo-desc">AIエージェントの行動記録から、人の承認を経ない書き込み・送信や暴走を見つけるツール</p>
+        </div>
+        <div class="repo-card">
           <div class="repo-title"><a href="https://github.com/takashi-101/fde-eval-harness">fde-eval-harness</a></div>
           <span class="repo-tag">Evals</span><span class="repo-tag">AI FinOps</span>
           <p class="repo-desc">必須キーワード・禁止語・JSONスキーマ準拠・推定トークンコスト（円換算）を0円モックで一括検証する回帰評価ハーネス。</p>
         </div>
         <div class="repo-card">
-          <div class="repo-title"><a href="https://github.com/takashi-101/fde-ops-doctor">fde-ops-doctor</a></div>
-          <span class="repo-tag">運用引き継ぎ</span><span class="repo-tag">自己診断</span>
-          <p class="repo-desc">非エンジニアの現場担当者が、Python環境・容量・設定ファイル・SQLite整合性をワンコマンドで一次切り分けできる診断ツール。</p>
+          <div class="repo-title"><a href="https://github.com/takashi-101/pii-guard-gateway">pii-guard-gateway</a></div>
+          <span class="repo-tag">Python</span><span class="repo-tag">PIIマスク</span><span class="repo-tag">監査ログ</span>
+          <p class="repo-desc">外部AI・ローカルLLMへ渡す前に氏名・電話・メール・個人番号・金額を自動マスクし、生データを残さずSHA-256ハッシュチェーンで改ざん検知付き監査ログを記録するゲートウェイ。</p>
         </div>
         <div class="repo-card">
           <div class="repo-title"><a href="https://github.com/takashi-101/fde-saas-webhook-bridge">fde-saas-webhook-bridge</a></div>
           <span class="repo-tag">SaaS連携</span><span class="repo-tag">冪等性/DLQ</span>
           <p class="repo-desc">kintone等の外部Webhook連携におけるスキーマ検証・冪等性キーによる二重処理防止・リトライ・DLQ隔離を担うアダプタ。</p>
+        </div>
+        <div class="repo-card">
+          <div class="repo-title"><a href="https://github.com/takashi-101/readonly-mcp">readonly-mcp</a></div>
+          <span class="repo-tag">MCP</span><span class="repo-tag">最小権限</span>
+          <p class="repo-desc">共通規格であるMCPの横展開リスクを抑えるため、参照専用・対象スコープ限定でAIに安全に文書を読ませるMCPサーバー実装。</p>
+        </div>
+        <div class="repo-card">
+          <div class="repo-title"><a href="https://github.com/takashi-101/ittsukan-tool">ittsukan-tool</a></div>
+          <span class="repo-tag">Webアプリ</span><span class="repo-tag">MCP</span>
+          <p class="repo-desc">要件定義から定着までの7工程を1本で通して扱うツール（詰まっている工程だけでも使える）</p>
+        </div>
+        <div class="repo-card">
+          <div class="repo-title"><a href="https://github.com/takashi-101/madoguchi-kaito">madoguchi-kaito</a></div>
+          <span class="repo-tag">Webアプリ</span><span class="repo-tag">Ollama</span>
+          <p class="repo-desc">マニュアルや例規の原文を根拠に、窓口・庁内の問い合わせへの回答をそろえるツール</p>
+        </div>
+        <div class="repo-card">
+          <div class="repo-title"><a href="https://github.com/takashi-101/shinsei-fubi-check">shinsei-fubi-check</a></div>
+          <span class="repo-tag">Webアプリ</span><span class="repo-tag">受付点検</span>
+          <p class="repo-desc">申請書の記載漏れ・書式の誤り・添付書類の不足を、受付の時点で確かめるツール</p>
+        </div>
+        <div class="repo-card">
+          <div class="repo-title"><a href="https://github.com/takashi-101/local-llm-record">local-llm-record</a></div>
+          <span class="repo-tag">閉域LLM</span><span class="repo-tag">Evals</span>
+          <p class="repo-desc">オフラインPC環境でのローカルLLM出力検収記録。全文入力方式とRAG方式をPython自動照合スクリプトで比較検証し、全出力とコードを公開。</p>
+        </div>
+        <div class="repo-card">
+          <div class="repo-title"><a href="https://github.com/takashi-101/gennai-oss-closed-port">gennai-oss-closed-port</a></div>
+          <span class="repo-tag">閉域LLM</span><span class="repo-tag">実測</span>
+          <p class="repo-desc">デジタル庁の源内OSSとローカルLLMを、メモリ16GB・GPUなしのノートPC1台で動かした記録</p>
+        </div>
+        <div class="repo-card">
+          <div class="repo-title"><a href="https://github.com/takashi-101/fde-checklist">fde-checklist</a></div>
+          <span class="repo-tag">オフラインHTML</span><span class="repo-tag">導入標準化</span>
+          <p class="repo-desc">実測を土台にした閉域ローカルLLM導入の6フェーズ・24項目チェックリストおよびAI配置判定ツール（単一HTMLでオフライン動作）。</p>
+        </div>
+        <div class="repo-card">
+          <div class="repo-title"><a href="https://github.com/takashi-101/ai-decision-audit">ai-decision-audit</a></div>
+          <span class="repo-tag">Webアプリ</span><span class="repo-tag">採否の記録</span>
+          <p class="repo-desc">AIへの依頼文と出力を並べ、依頼に無いのにAIが決めたことに印を付けて、採るか採らないかを記録するツール</p>
+        </div>
+        <div class="repo-card">
+          <div class="repo-title"><a href="https://github.com/takashi-101/gyomu-tanaoroshi">gyomu-tanaoroshi</a></div>
+          <span class="repo-tag">オフラインHTML</span><span class="repo-tag">業務棚卸し</span>
+          <p class="repo-desc">自治体の事務職場向けの業務棚卸し・事務引継ぎ記録ツール（ネットにつながないPCでも動作）</p>
+        </div>
+        <div class="repo-card">
+          <div class="repo-title"><a href="https://github.com/takashi-101/scs-star3-selfcheck">scs-star3-selfcheck</a></div>
+          <span class="repo-tag">オフラインHTML</span><span class="repo-tag">セキュリティ</span>
+          <p class="repo-desc">SCS評価制度★3の自己点検ツール（外部への通信なし）</p>
+        </div>
+        <div class="repo-card">
+          <div class="repo-title"><a href="https://github.com/takashi-101/funding-guide">funding-guide</a></div>
+          <span class="repo-tag">Webアプリ</span><span class="repo-tag">AI FinOps</span>
+          <p class="repo-desc">AI導入・人材育成に使える公的制度（国27制度枠＋自治体1件）の探索と試算Webアプリ。回帰テスト13本・画面操作23項目を検証済み。</p>
+        </div>
+        <div class="repo-card">
+          <div class="repo-title"><a href="https://github.com/takashi-101/palantir-applied-notional-project">palantir-applied-notional-project</a></div>
+          <span class="repo-tag">Palantir Learn</span><span class="repo-tag">Webアプリ</span>
+          <p class="repo-desc">Palantir Learn の実践課題を、ブラウザだけで動く1枚のページで作った成果物（データの掃除・車両一覧・不具合の受付箱）</p>
+        </div>
+        <div class="repo-card">
+          <div class="repo-title"><a href="https://github.com/takashi-101/remove-keep-marks">remove-keep-marks</a></div>
+          <span class="repo-tag">PowerShell</span><span class="repo-tag">業務改善</span>
+          <p class="repo-desc">Word見出しに付く黒い点（段落設定）の不具合を原因から自動修復するPowerShellスクリプト。</p>
+        </div>
+      </div>
+      <h3>現場で使う小さな道具</h3>
+      <div class="repo-grid">
+        <div class="repo-card">
+          <div class="repo-title"><a href="https://github.com/takashi-101/fde-ops-doctor">fde-ops-doctor</a></div>
+          <span class="repo-tag">運用引き継ぎ</span><span class="repo-tag">自己診断</span>
+          <p class="repo-desc">非エンジニアの現場担当者が、Python環境・容量・設定ファイル・SQLite整合性をワンコマンドで一次切り分けできる診断ツール。</p>
         </div>
         <div class="repo-card">
           <div class="repo-title"><a href="https://github.com/takashi-101/fde-rag-chunk-auditor">fde-rag-chunk-auditor</a></div>
@@ -324,31 +412,6 @@
           <div class="repo-title"><a href="https://github.com/takashi-101/fde-handover-runbook-gen">fde-handover-runbook-gen</a></div>
           <span class="repo-tag">運用定着</span><span class="repo-tag">手順書生成</span>
           <p class="repo-desc">日次確認コマンド・連絡先・切り戻し手順の構造データから統一フォーマットの運用引き継ぎ書を自動生成するツール。</p>
-        </div>
-        <div class="repo-card">
-          <div class="repo-title"><a href="https://github.com/takashi-101/local-llm-record">local-llm-record</a></div>
-          <span class="repo-tag">閉域LLM</span><span class="repo-tag">Evals</span>
-          <p class="repo-desc">オフラインPC環境でのローカルLLM出力検収記録。全文入力方式とRAG方式をPython自動照合スクリプトで比較検証し、全出力とコードを公開。</p>
-        </div>
-        <div class="repo-card">
-          <div class="repo-title"><a href="https://github.com/takashi-101/fde-checklist">fde-checklist</a></div>
-          <span class="repo-tag">オフラインHTML</span><span class="repo-tag">導入標準化</span>
-          <p class="repo-desc">実測を土台にした閉域ローカルLLM導入の6フェーズ・24項目チェックリストおよびAI配置判定ツール（単一HTMLでオフライン動作）。</p>
-        </div>
-        <div class="repo-card">
-          <div class="repo-title"><a href="https://github.com/takashi-101/readonly-mcp">readonly-mcp</a></div>
-          <span class="repo-tag">MCP</span><span class="repo-tag">最小権限</span>
-          <p class="repo-desc">共通規格であるMCPの横展開リスクを抑えるため、参照専用・対象スコープ限定でAIに安全に文書を読ませるMCPサーバー実装。</p>
-        </div>
-        <div class="repo-card">
-          <div class="repo-title"><a href="https://github.com/takashi-101/funding-guide">funding-guide</a></div>
-          <span class="repo-tag">Webアプリ</span><span class="repo-tag">AI FinOps</span>
-          <p class="repo-desc">AI導入・人材育成に使える公的制度（国27制度枠＋自治体1件）の探索と試算Webアプリ。回帰テスト13本・画面操作23項目を検証済み。</p>
-        </div>
-        <div class="repo-card">
-          <div class="repo-title"><a href="https://github.com/takashi-101/remove-keep-marks">remove-keep-marks</a></div>
-          <span class="repo-tag">PowerShell</span><span class="repo-tag">業務改善</span>
-          <p class="repo-desc">Word見出しに付く黒い点（段落設定）の不具合を原因から自動修復するPowerShellスクリプト。</p>
         </div>
       </div>
     </section>
