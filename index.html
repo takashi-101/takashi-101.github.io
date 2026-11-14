@@ -176,7 +176,7 @@
     tbody tr:nth-child(even) { background: var(--surface); }
     .repo-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
       gap: 14px;
       margin-top: 12px;
     }
@@ -229,6 +229,47 @@
       color: var(--muted);
       margin-top: 32px;
     }
+    @media (max-width: 820px) {
+      table.stack { min-width: 0; font-size: 0.95rem; }
+      table.stack, table.stack tbody, table.stack tr, table.stack td { display: block; }
+      table.stack thead {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0 0 0 0);
+        clip-path: inset(50%);
+        white-space: nowrap;
+      }
+      table.stack tbody tr {
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        overflow: hidden;
+        margin-bottom: 12px;
+        background: var(--card);
+      }
+      table.stack td { border: 0; border-top: 1px solid var(--border); padding: 10px 14px; }
+      table.stack td:first-child { border-top: 0; background: var(--surface); }
+      table.stack td[data-label]:not(:first-child)::before {
+        content: attr(data-label);
+        display: block;
+        margin-bottom: 2px;
+        font-size: 0.8rem;
+        font-weight: 700;
+        color: var(--primary);
+      }
+      table.stack.compact tbody tr { margin-bottom: 8px; }
+      table.stack.compact td { border-top: 0; padding: 2px 12px; }
+      table.stack.compact td:first-child {
+        background: transparent;
+        padding-top: 8px;
+        font-size: 0.8rem;
+        color: var(--muted);
+      }
+      table.stack.compact td:last-child { padding-bottom: 8px; }
+      table.stack.compact td[data-label]:not(:first-child)::before { content: none; }
+    }
   </style>
 </head>
 <body>
@@ -275,51 +316,51 @@
       <h2>私立大学職員時代（24年間）</h2>
       <p class="section-note">大学組織はプロジェクト単位で体制や予算を組む仕組みがなく、定常業務の枠内で動くのが基本のため、以下の取り組みはいずれも通常業務と並行して自ら立ち上げた。</p>
       <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th style="width: 19%;">取り組み</th>
-              <th style="width: 24%;">要件定義</th>
-              <th style="width: 28%;">設計・実装</th>
-              <th style="width: 29%;">定着・再現性</th>
+        <table class="stack" role="table">
+          <thead role="rowgroup">
+            <tr role="row">
+              <th role="columnheader" style="width: 19%;">取り組み</th>
+              <th role="columnheader" style="width: 24%;">要件定義</th>
+              <th role="columnheader" style="width: 28%;">設計・実装</th>
+              <th role="columnheader" style="width: 29%;">定着・再現性</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td><strong>学内印刷業務の収益事業化</strong><br>（2011年）</td>
-              <td>担当外の立場から、最低発注ロットの条件が余剰在庫と特定職員への業務集中を生んでいる構造をつかんだ</td>
-              <td>子会社の新規事業としてイニシャル・ランニングコストをゼロベースで検討し、遊休スペースへ外部専門事業者を誘致する契約モデルを設計して設立</td>
-              <td>直接関与できないため必要な事項を引き継ぎ間接的な関与に留め、以降は子会社単独で自走。大学本体の持ち出しゼロで長期黒字事業（累計10億円超規模）となり、首都圏の私立大学でも同モデルを開始（2013年）</td>
+          <tbody role="rowgroup">
+            <tr role="row">
+              <td role="cell" data-label="取り組み"><strong>学内印刷業務の収益事業化</strong><br>（2011年）</td>
+              <td role="cell" data-label="要件定義">担当外の立場から、最低発注ロットの条件が余剰在庫と特定職員への業務集中を生んでいる構造をつかんだ</td>
+              <td role="cell" data-label="設計・実装">子会社の新規事業としてイニシャル・ランニングコストをゼロベースで検討し、遊休スペースへ外部専門事業者を誘致する契約モデルを設計して設立</td>
+              <td role="cell" data-label="定着・再現性">直接関与できないため必要な事項を引き継ぎ間接的な関与に留め、以降は子会社単独で自走。大学本体の持ち出しゼロで長期黒字事業（累計10億円超規模）となり、首都圏の私立大学でも同モデルを開始（2013年）</td>
             </tr>
-            <tr>
-              <td><strong>最高意思決定機関への遠隔会議導入</strong><br>（2018年）</td>
-              <td>月1回の全学会議のため、授業・研究指導・外来が止まる全学的な稼働制約があった</td>
-              <td>最上位の会議体から導入し、5年回収計画で投資判断を確保。単年で導入</td>
-              <td>トラブル事例を画像付きの手順書にし、他部署が自ら利用を申し出た。1日4〜5件の会議で使われ、意思決定者からも投資回収済みとの評価を受領</td>
+            <tr role="row">
+              <td role="cell" data-label="取り組み"><strong>最高意思決定機関への遠隔会議導入</strong><br>（2018年）</td>
+              <td role="cell" data-label="要件定義">月1回の全学会議のため、授業・研究指導・外来が止まる全学的な稼働制約があった</td>
+              <td role="cell" data-label="設計・実装">最上位の会議体から導入し、5年回収計画で投資判断を確保。単年で導入</td>
+              <td role="cell" data-label="定着・再現性">トラブル事例を画像付きの手順書にし、他部署が自ら利用を申し出た。1日4〜5件の会議で使われ、意思決定者からも投資回収済みとの評価を受領</td>
             </tr>
-            <tr>
-              <td><strong>学内駐車場の利用区分再設計</strong><br>（2019年）</td>
-              <td>約30年続く赤字構造。許可枚数に根拠がなく、利用区分と実際の利用者が一致していなかった</td>
-              <td>天候や学内行事の条件別に巡回記録と目視で実態を計測。無許可利用は現場の権限者を通じて是正し、日勤と夜勤の重なりから許可枚数を算出</td>
-              <td>巡回記録が仕組みとして続き、追加投資なしで許可枚数を1.5倍へ拡大。長期の赤字構造から黒字へ転換した</td>
+            <tr role="row">
+              <td role="cell" data-label="取り組み"><strong>学内駐車場の利用区分再設計</strong><br>（2019年）</td>
+              <td role="cell" data-label="要件定義">約30年続く赤字構造。許可枚数に根拠がなく、利用区分と実際の利用者が一致していなかった</td>
+              <td role="cell" data-label="設計・実装">天候や学内行事の条件別に巡回記録と目視で実態を計測。無許可利用は現場の権限者を通じて是正し、日勤と夜勤の重なりから許可枚数を算出</td>
+              <td role="cell" data-label="定着・再現性">巡回記録が仕組みとして続き、追加投資なしで許可枚数を1.5倍へ拡大。長期の赤字構造から黒字へ転換した</td>
             </tr>
-            <tr>
-              <td><strong>認証評価のオンライン実地調査</strong><br>（2020年度）</td>
-              <td>コロナ禍で、システム担当ではない自分が1人で会場を作り、集まることを嫌う教職員を集める必要があった</td>
-              <td>最も安定した基幹回線を選び、費用ゼロ・1日で自作。自ら学内の役職者と折衝し、感染対策責任者の出席を先に確保した上で不参加リスクを伝えて全学体制を構築</td>
-              <td>全日程トラブルゼロで「大学基準に適合」を獲得（執筆章から長所2件）。2020年度に学長から文化醸成を評価され、翌2021年度の自己点検・評価の回収期間も約2か月（60日）→約1週間（7日）に短縮</td>
+            <tr role="row">
+              <td role="cell" data-label="取り組み"><strong>認証評価のオンライン実地調査</strong><br>（2020年度）</td>
+              <td role="cell" data-label="要件定義">コロナ禍で、システム担当ではない自分が1人で会場を作り、集まることを嫌う教職員を集める必要があった</td>
+              <td role="cell" data-label="設計・実装">最も安定した基幹回線を選び、費用ゼロ・1日で自作。自ら学内の役職者と折衝し、感染対策責任者の出席を先に確保した上で不参加リスクを伝えて全学体制を構築</td>
+              <td role="cell" data-label="定着・再現性">全日程トラブルゼロで「大学基準に適合」を獲得（執筆章から長所2件）。2020年度に学長から文化醸成を評価され、翌2021年度の自己点検・評価の回収期間も約2か月（60日）→約1週間（7日）に短縮</td>
             </tr>
-            <tr>
-              <td><strong>生成AIによる窓口対応の標準化</strong><br>（2023年）</td>
-              <td>窓口対応が一部の係6名に偏り、昼休みも返上していた</td>
-              <td>選抜制WGの最優秀検証案として各係のマニュアルを統合し、12名全員で回答案を揃えた。他大学（国立大学）専門講師の外部レビューも経て、スプレッドシートに固定</td>
-              <td>2係12名全員が一次対応できる体制に移行。1日平均12〜15組の来訪のうち、二次対応は約2割まで減少</td>
+            <tr role="row">
+              <td role="cell" data-label="取り組み"><strong>生成AIによる窓口対応の標準化</strong><br>（2023年）</td>
+              <td role="cell" data-label="要件定義">窓口対応が一部の係6名に偏り、昼休みも返上していた</td>
+              <td role="cell" data-label="設計・実装">選抜制WGの最優秀検証案として各係のマニュアルを統合し、12名全員で回答案を揃えた。他大学（国立大学）専門講師の外部レビューも経て、スプレッドシートに固定</td>
+              <td role="cell" data-label="定着・再現性">2係12名全員が一次対応できる体制に移行。1日平均12〜15組の来訪のうち、二次対応は約2割まで減少</td>
             </tr>
-            <tr>
-              <td><strong>生成AIとの分業による業務見直し</strong><br>（2023〜2024年）</td>
-              <td>AIに任せられる範囲と、人が最終責任を持つ範囲を切り分ける必要があった</td>
-              <td>業務の要件を整理してAIへ渡す工程と、人が照合・判断する工程を明確に分離して運用</td>
-              <td>1日の業務時間を半日に短縮（大学と行政の両現場で再現）。創出した時間で後進の業務を並走支援</td>
+            <tr role="row">
+              <td role="cell" data-label="取り組み"><strong>生成AIとの分業による業務見直し</strong><br>（2023〜2024年）</td>
+              <td role="cell" data-label="要件定義">AIに任せられる範囲と、人が最終責任を持つ範囲を切り分ける必要があった</td>
+              <td role="cell" data-label="設計・実装">業務の要件を整理してAIへ渡す工程と、人が照合・判断する工程を明確に分離して運用</td>
+              <td role="cell" data-label="定着・再現性">1日の業務時間を半日に短縮（大学と行政の両現場で再現）。創出した時間で後進の業務を並走支援</td>
             </tr>
           </tbody>
         </table>
@@ -330,39 +371,39 @@
       <h2>行政・地域・個人の現場へ（2025年〜）</h2>
       <p class="section-note">退職後は行政・NPO・個人開発へ場を広げ、コードと全出力の公開によって検証可能な形で再現性を残しています。</p>
       <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th style="width: 19%;">取り組み</th>
-              <th style="width: 24%;">要件定義</th>
-              <th style="width: 28%;">設計・実装</th>
-              <th style="width: 29%;">定着・再現性</th>
+        <table class="stack" role="table">
+          <thead role="rowgroup">
+            <tr role="row">
+              <th role="columnheader" style="width: 19%;">取り組み</th>
+              <th role="columnheader" style="width: 24%;">要件定義</th>
+              <th role="columnheader" style="width: 28%;">設計・実装</th>
+              <th role="columnheader" style="width: 29%;">定着・再現性</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td><strong>自治体への課題解決案の提供</strong><br>（県内自治体・2025年1月）</td>
-              <td>社会教育担当から業務課題を聞き取った</td>
-              <td>社会教育士として先行自治体の前例を生成AIで調査し、課題解決案のたたき台を作成</td>
-              <td>採用の有無を問わず、自治体側で自由に改変・再利用できるよう著作権を放棄して無償提供</td>
+          <tbody role="rowgroup">
+            <tr role="row">
+              <td role="cell" data-label="取り組み"><strong>自治体への課題解決案の提供</strong><br>（県内自治体・2025年1月）</td>
+              <td role="cell" data-label="要件定義">社会教育担当から業務課題を聞き取った</td>
+              <td role="cell" data-label="設計・実装">社会教育士として先行自治体の前例を生成AIで調査し、課題解決案のたたき台を作成</td>
+              <td role="cell" data-label="定着・再現性">採用の有無を問わず、自治体側で自由に改変・再利用できるよう著作権を放棄して無償提供</td>
             </tr>
-            <tr>
-              <td><strong>福岡市行政事務センターの滞留処理・標準化</strong><br>（2025年2〜3月）</td>
-              <td>開所後初の年度末で、照会業務1,176件が滞留。即時回答と応答待ち案件が混在し処理が止まっていた</td>
-              <td>案件を先に分類し、成果物から逆算する設計で処理を3段階へ組み替え、並行・一括処理により滞留分1,176件を130分で解消</td>
-              <td>通常運用向けの標準処理手順書（36項目・5工程）を整備し、平均処理時間5.0分→2.5分（29〜60%短縮）・誤出力0件を実現。庁内標準として登録</td>
+            <tr role="row">
+              <td role="cell" data-label="取り組み"><strong>福岡市行政事務センターの滞留処理・標準化</strong><br>（2025年2〜3月）</td>
+              <td role="cell" data-label="要件定義">開所後初の年度末で、照会業務1,176件が滞留。即時回答と応答待ち案件が混在し処理が止まっていた</td>
+              <td role="cell" data-label="設計・実装">案件を先に分類し、成果物から逆算する設計で処理を3段階へ組み替え、並行・一括処理により滞留分1,176件を130分で解消</td>
+              <td role="cell" data-label="定着・再現性">通常運用向けの標準処理手順書（36項目・5工程）を整備し、平均処理時間5.0分→2.5分（29〜60%短縮）・誤出力0件を実現。庁内標準として登録</td>
             </tr>
-            <tr>
-              <td><strong>デジタル推進委員向け講座</strong><br>（NPO法人・2026年9月）</td>
-              <td>受講者の多くはリタイア後のシニア。生活ですぐ使える題材を条件に設定</td>
-              <td>60分のオンライン講座を、結論から理由の順に組み、受講者に操作を求めない構成で設計</td>
-              <td>教材と動画が法人内で会員に共有された。質問には後日出典付きで「検証済み／未確認」を分けて回答</td>
+            <tr role="row">
+              <td role="cell" data-label="取り組み"><strong>デジタル推進委員向け講座</strong><br>（NPO法人・2026年9月）</td>
+              <td role="cell" data-label="要件定義">受講者の多くはリタイア後のシニア。生活ですぐ使える題材を条件に設定</td>
+              <td role="cell" data-label="設計・実装">60分のオンライン講座を、結論から理由の順に組み、受講者に操作を求めない構成で設計</td>
+              <td role="cell" data-label="定着・再現性">教材と動画が法人内で会員に共有された。質問には後日出典付きで「検証済み／未確認」を分けて回答</td>
             </tr>
-            <tr>
-              <td><strong>閉域ローカルLLM検証と導入基盤</strong><br>（個人・2026年）</td>
-              <td>通信遮断環境で規程から守るべき事項を漏れなく抽出できるか、どう検収するかを課題設定</td>
-              <td>全文方式とRAG方式を比較し、Pythonで実行と照合を自動化。PIIマスク・信頼境界・HITLまで実装</td>
-              <td>コードと全出力をGitHub（<code>local-llm-record</code>、<code>fde-checklist</code>、<code>pii-guard-gateway</code>、<code>fde-hybrid-router</code>）で公開</td>
+            <tr role="row">
+              <td role="cell" data-label="取り組み"><strong>閉域ローカルLLM検証と導入基盤</strong><br>（個人・2026年）</td>
+              <td role="cell" data-label="要件定義">通信遮断環境で規程から守るべき事項を漏れなく抽出できるか、どう検収するかを課題設定</td>
+              <td role="cell" data-label="設計・実装">全文方式とRAG方式を比較し、Pythonで実行と照合を自動化。PIIマスク・信頼境界・HITLまで実装</td>
+              <td role="cell" data-label="定着・再現性">コードと全出力をGitHub（<code>local-llm-record</code>、<code>fde-checklist</code>、<code>pii-guard-gateway</code>、<code>fde-hybrid-router</code>）で公開</td>
             </tr>
           </tbody>
         </table>
@@ -381,7 +422,7 @@
         <div class="repo-card featured">
           <div class="repo-title"><a href="https://github.com/takashi-101/fde-hybrid-router">fde-hybrid-router</a></div>
           <span class="repo-tag">SQLite/DB</span><span class="repo-tag">Trust Boundary</span><span class="repo-tag">HITL</span>
-          <p class="repo-desc">公開情報はクラウドLLM、個人情報・内部情報はマスクして閉域ローカルLLMへ自動振り分け。インジェクション検知時は遮断し、低確信度・高リスク案件はDBの人間レビューキューへ送る基盤。</p>
+          <p class="repo-desc">機密区分で問い合わせを振り分けるルーター。個人情報を含むものはマスキングしてローカルLLM（Ollama）に送る。クラウド側は差し替え口と見本</p>
         </div>
         <div class="repo-card featured">
           <div class="repo-title"><a href="https://github.com/takashi-101/mcp-tool-lock">mcp-tool-lock</a></div>
@@ -401,7 +442,7 @@
         <div class="repo-card">
           <div class="repo-title"><a href="https://github.com/takashi-101/fde-eval-harness">fde-eval-harness</a></div>
           <span class="repo-tag">Evals</span><span class="repo-tag">AI FinOps</span>
-          <p class="repo-desc">必須キーワード・禁止語・JSONスキーマ準拠・推定トークンコスト（円換算）を0円モックで一括検証する回帰評価ハーネス。</p>
+          <p class="repo-desc">fde-hybrid-router とローカルLLMを架空の13件で評価し、結果をRESULTS.mdに記録した評価ハーネス</p>
         </div>
         <div class="repo-card">
           <div class="repo-title"><a href="https://github.com/takashi-101/pii-guard-gateway">pii-guard-gateway</a></div>
@@ -411,7 +452,7 @@
         <div class="repo-card">
           <div class="repo-title"><a href="https://github.com/takashi-101/fde-saas-webhook-bridge">fde-saas-webhook-bridge</a></div>
           <span class="repo-tag">SaaS連携</span><span class="repo-tag">冪等性/DLQ</span>
-          <p class="repo-desc">kintone等の外部Webhook連携におけるスキーマ検証・冪等性キーによる二重処理防止・リトライ・DLQ隔離を担うアダプタ。</p>
+          <p class="repo-desc">Webhookの汎用の受信サーバー。署名検証・二重処理の防止・再試行・DLQ（処理できなかった通知の退避先）を1コマンドのデモで確かめられる</p>
         </div>
         <div class="repo-card">
           <div class="repo-title"><a href="https://github.com/takashi-101/readonly-mcp">readonly-mcp</a></div>
@@ -499,12 +540,12 @@
         <div class="repo-card">
           <div class="repo-title"><a href="https://github.com/takashi-101/fde-csv-schema-validator">fde-csv-schema-validator</a></div>
           <span class="repo-tag">データ連携</span><span class="repo-tag">前処理</span>
-          <p class="repo-desc">業務CSVの重複ID・欠損・和暦/スラッシュ混在日付をAI処理前に検疫・正規化する前処理バリデータ。</p>
+          <p class="repo-desc">業務CSVのID列の欠損・重複と、日付の表記を確かめる前処理</p>
         </div>
         <div class="repo-card">
           <div class="repo-title"><a href="https://github.com/takashi-101/fde-cost-quota-guard">fde-cost-quota-guard</a></div>
           <span class="repo-tag">AI FinOps</span><span class="repo-tag">予算制御</span>
-          <p class="repo-desc">部署・案件単位の月次API予算（円上限）をローカル管理し、上限到達時に実行を自動停止するコスト制御ガード。</p>
+          <p class="repo-desc">見積額と台帳の合計が上限を超えるかを判定する、予算の台帳</p>
         </div>
         <div class="repo-card">
           <div class="repo-title"><a href="https://github.com/takashi-101/fde-handover-runbook-gen">fde-handover-runbook-gen</a></div>
@@ -518,44 +559,44 @@
       <h2>第三者が確認できる修了証・学習証跡</h2>
       <p class="section-note">検証可能な外部バッジ・修了証の集約先：<a href="https://www.credly.com/users/takashi-higuchi.2d0eec27">Credly 公開プロフィール</a></p>
       <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th style="width: 24%;">発行元</th>
-              <th style="width: 52%;">主な修了証・アセスメント（厳選）</th>
-              <th style="width: 24%;">確認先・時期</th>
+        <table class="stack" role="table">
+          <thead role="rowgroup">
+            <tr role="row">
+              <th role="columnheader" style="width: 24%;">発行元</th>
+              <th role="columnheader" style="width: 52%;">主な修了証・アセスメント（厳選）</th>
+              <th role="columnheader" style="width: 24%;">確認先・時期</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td><strong>Palantir Technologies</strong></td>
-              <td>Foundry &amp; AIP Builder Foundations / Agentic AIP Workflow / End-to-End Workflow / Scoping Use Cases（Speedrun 5件・Deep Dive 9件・Applied Notional Project 修了、バッジ18件）</td>
-              <td>Palantir Learn<br>（2026年10月）</td>
+          <tbody role="rowgroup">
+            <tr role="row">
+              <td role="cell" data-label="発行元"><strong>Palantir Technologies</strong></td>
+              <td role="cell" data-label="主な修了証・アセスメント（厳選）">Foundry &amp; AIP Builder Foundations / Agentic AIP Workflow / End-to-End Workflow / Scoping Use Cases（Speedrun 5件・Deep Dive 9件・Applied Notional Project 修了、バッジ18件）</td>
+              <td role="cell" data-label="確認先・時期">Palantir Learn<br>（2026年10月）</td>
             </tr>
-            <tr>
-              <td><strong>AWS</strong></td>
-              <td>Well-Architected Proficient / AWS Security Champion / Amazon Q Developer Fundamentals / Networking Core / Serverless（Knowledge Badge Assessment 合格）</td>
-              <td><a href="https://www.credly.com/users/takashi-higuchi.2d0eec27">Credly</a><br>（2025年5〜11月）</td>
+            <tr role="row">
+              <td role="cell" data-label="発行元"><strong>AWS</strong></td>
+              <td role="cell" data-label="主な修了証・アセスメント（厳選）">Well-Architected Proficient / AWS Security Champion / Amazon Q Developer Fundamentals / Networking Core / Serverless（Knowledge Badge Assessment 合格）</td>
+              <td role="cell" data-label="確認先・時期"><a href="https://www.credly.com/users/takashi-higuchi.2d0eec27">Credly</a><br>（2025年5〜11月）</td>
             </tr>
-            <tr>
-              <td><strong>OpenAI Academy</strong></td>
-              <td>AI Foundations / Applied AI Foundations / Agents and Workflows</td>
-              <td>OpenAI Academy</td>
+            <tr role="row">
+              <td role="cell" data-label="発行元"><strong>OpenAI Academy</strong></td>
+              <td role="cell" data-label="主な修了証・アセスメント（厳選）">AI Foundations / Applied AI Foundations / Agents and Workflows</td>
+              <td role="cell" data-label="確認先・時期">OpenAI Academy</td>
             </tr>
-            <tr>
-              <td><strong>Anthropic</strong></td>
-              <td>Claude Code in Action / Claude with the Anthropic API / Introduction to Model Context Protocol / MCP: Advanced Topics ほか</td>
-              <td>Anthropic</td>
+            <tr role="row">
+              <td role="cell" data-label="発行元"><strong>Anthropic</strong></td>
+              <td role="cell" data-label="主な修了証・アセスメント（厳選）">Claude Code in Action / Claude with the Anthropic API / Introduction to Model Context Protocol / MCP: Advanced Topics ほか</td>
+              <td role="cell" data-label="確認先・時期">Anthropic</td>
             </tr>
-            <tr>
-              <td><strong>IBM / Google（Coursera）</strong></td>
-              <td>IBM RAG and Agentic AI Professional Certificate V3 / IBM Generative AI Engineering / Google AI Professional Certificate / Google Cybersecurity V2</td>
-              <td><a href="https://www.credly.com/users/takashi-higuchi.2d0eec27">Credly</a> / Coursera<br>（2026年8〜11月）</td>
+            <tr role="row">
+              <td role="cell" data-label="発行元"><strong>IBM / Google（Coursera）</strong></td>
+              <td role="cell" data-label="主な修了証・アセスメント（厳選）">IBM RAG and Agentic AI Professional Certificate V3 / IBM Generative AI Engineering / Google AI Professional Certificate / Google Cybersecurity V2</td>
+              <td role="cell" data-label="確認先・時期"><a href="https://www.credly.com/users/takashi-higuchi.2d0eec27">Credly</a> / Coursera<br>（2026年8〜11月）</td>
             </tr>
-            <tr>
-              <td><strong>Microsoft Learn</strong></td>
-              <td>Azureアーキテクチャ（AZ-305/AZ-400関連）・セキュリティ（Entra ID / Purview / Defender）・AI Foundry・Copilot拡張・Power Platform関連ラーニングパス修了</td>
-              <td>Microsoft Learn<br>（2025年11月〜2026年10月）</td>
+            <tr role="row">
+              <td role="cell" data-label="発行元"><strong>Microsoft Learn</strong></td>
+              <td role="cell" data-label="主な修了証・アセスメント（厳選）">Azureアーキテクチャ（AZ-305/AZ-400関連）・セキュリティ（Entra ID / Purview / Defender）・AI Foundry・Copilot拡張・Power Platform関連ラーニングパス修了</td>
+              <td role="cell" data-label="確認先・時期">Microsoft Learn<br>（2025年11月〜2026年10月）</td>
             </tr>
           </tbody>
         </table>
@@ -569,65 +610,65 @@
         </ul>
   <h3>Courseraで修了した専門講座（Specialization）25件</h3>
   <div class="table-wrap">
-  <table>
-    <thead><tr><th>発行元</th><th>名称</th><th>確認先</th></tr></thead>
-    <tbody>
-    <tr><td>IBM・SkillUp（Coursera）</td><td>Generative AI for Business Intelligence (BI) Analysts Specialization（2026年11月）</td><td><a href="https://coursera.org/verify/specialization/KGUS6SXC6YFV">Coursera</a></td></tr>
-    <tr><td>IBM・SkillUp（Coursera）</td><td>Generative AI for IT Systems Analysts and Architects Specialization（2026年11月）</td><td><a href="https://coursera.org/verify/specialization/9SSL1IJ876WO">Coursera</a></td></tr>
-    <tr><td>IBM・SkillUp（Coursera）</td><td>Generative AI for Customer Support Specialization（2026年11月）</td><td><a href="https://coursera.org/verify/specialization/OMTLYQ07JYCJ">Coursera</a></td></tr>
-    <tr><td>IBM・SkillUp（Coursera）</td><td>Generative AI for Business Analysts Specialization（2026年11月）</td><td><a href="https://coursera.org/verify/specialization/55QU54K709E6">Coursera</a></td></tr>
-    <tr><td>IBM・SkillUp（Coursera）</td><td>Generative AI for Product Owners Specialization（2026年11月）</td><td><a href="https://coursera.org/verify/specialization/GV933L70CF5H">Coursera</a></td></tr>
-    <tr><td>IBM・SkillUp（Coursera）</td><td>Generative AI for Program Managers Specialization（2026年11月）</td><td><a href="https://coursera.org/verify/specialization/2UM2B4YPBE3R">Coursera</a></td></tr>
-    <tr><td>IBM・SkillUp（Coursera）</td><td>Generative AI for Human Resources (HR) Professionals Specialization（2026年11月）</td><td><a href="https://coursera.org/verify/specialization/37E7C5NP1PBH">Coursera</a></td></tr>
-    <tr><td>IBM・SkillUp（Coursera）</td><td>Generative AI for Mobile App Developers Specialization（2026年11月）</td><td><a href="https://coursera.org/verify/specialization/JR6T1E2RQ9N4">Coursera</a></td></tr>
-    <tr><td>IBM・SkillUp（Coursera）</td><td>Generative AI for Java and Spring Developers Specialization（2026年11月）</td><td><a href="https://coursera.org/verify/specialization/B9QN8DNIG02S">Coursera</a></td></tr>
-    <tr><td>IBM・SkillUp（Coursera）</td><td>Generative AI for Project Managers Specialization（2026年11月）</td><td><a href="https://coursera.org/verify/specialization/GP6H5OLNH2C0">Coursera</a></td></tr>
-    <tr><td>IBM（Coursera）</td><td>Generative AI for Educators Specialization（2026年11月）</td><td><a href="https://coursera.org/verify/specialization/201S3URRD6PC">Coursera</a></td></tr>
-    <tr><td>IBM（Coursera）</td><td>Generative AI for Sales Professionals Specialization（2026年11月）</td><td><a href="https://coursera.org/verify/specialization/YPDDPFNZ023P">Coursera</a></td></tr>
-    <tr><td>IBM（Coursera）</td><td>Generative AI for Data Analysts Specialization（2026年11月）</td><td><a href="https://coursera.org/verify/specialization/YGUR9S8VTTEY">Coursera</a></td></tr>
-    <tr><td>IBM（Coursera）</td><td>Generative AI for Data Engineers Specialization（2026年11月）</td><td><a href="https://coursera.org/verify/specialization/5BDOBS95XGH0">Coursera</a></td></tr>
-    <tr><td>IBM（Coursera）</td><td>Generative AI for Data Scientists Specialization（2026年11月）</td><td><a href="https://coursera.org/verify/specialization/KJVF3L4E0UQP">Coursera</a></td></tr>
-    <tr><td>IBM（Coursera）</td><td>Generative AI Fundamentals Specialization（2026年11月）</td><td><a href="https://coursera.org/verify/specialization/PCQP03UXKDYZ">Coursera</a></td></tr>
-    <tr><td>IBM（Coursera）</td><td>Generative AI for Executives and Business Leaders Specialization（2026年11月）</td><td><a href="https://coursera.org/verify/specialization/YZ1G6P9A9ZR9">Coursera</a></td></tr>
-    <tr><td>IBM（Coursera）</td><td>Generative AI for Software Developers Specialization（2026年11月）</td><td><a href="https://coursera.org/verify/specialization/ZOK95KMOY3CE">Coursera</a></td></tr>
-    <tr><td>IBM（Coursera）</td><td>AI Foundations for Everyone Specialization（2026年11月）</td><td><a href="https://coursera.org/verify/specialization/59HG8CJJO4U3">Coursera</a></td></tr>
-    <tr><td>IBM（Coursera）</td><td>IBM Generative AI for Cybersecurity Professionals Specialization（2026年11月）</td><td><a href="https://coursera.org/verify/specialization/K06Q6MGL83VN">Coursera</a></td></tr>
-    <tr><td>IBM（Coursera）</td><td>Generative AI Engineering with LLMs Specialization（2026年11月）</td><td><a href="https://coursera.org/verify/specialization/2H28YMTAH0MC">Coursera</a></td></tr>
-    <tr><td>IBM（Coursera）</td><td>Building AI Agents and Agentic Workflows Specialization（2026年11月）</td><td><a href="https://coursera.org/verify/specialization/3RJ5WQS97R7J">Coursera</a></td></tr>
-    <tr><td>IBM（Coursera）</td><td>RAG for Generative AI Applications Specialization（2026年11月）</td><td><a href="https://coursera.org/verify/specialization/UR7PYSSSBXZ3">Coursera</a></td></tr>
-    <tr><td>Google（Coursera）</td><td>Google AI Essentials Specialization（2026年10月）</td><td><a href="https://coursera.org/verify/specialization/101M4AEO8E8T">Coursera</a></td></tr>
-    <tr><td>Google（Coursera）</td><td>Google Prompting Essentials Specialization（2026年10月）</td><td><a href="https://coursera.org/verify/specialization/FDQOYMDUDI15">Coursera</a></td></tr>
+  <table class="stack compact" role="table">
+    <thead role="rowgroup"><tr role="row"><th role="columnheader">発行元</th><th role="columnheader">名称</th><th role="columnheader">確認先</th></tr></thead>
+    <tbody role="rowgroup">
+    <tr role="row"><td role="cell" data-label="発行元">IBM・SkillUp（Coursera）</td><td role="cell" data-label="名称">Generative AI for Business Intelligence (BI) Analysts Specialization（2026年11月）</td><td role="cell" data-label="確認先"><a href="https://coursera.org/verify/specialization/KGUS6SXC6YFV">Coursera</a></td></tr>
+    <tr role="row"><td role="cell" data-label="発行元">IBM・SkillUp（Coursera）</td><td role="cell" data-label="名称">Generative AI for IT Systems Analysts and Architects Specialization（2026年11月）</td><td role="cell" data-label="確認先"><a href="https://coursera.org/verify/specialization/9SSL1IJ876WO">Coursera</a></td></tr>
+    <tr role="row"><td role="cell" data-label="発行元">IBM・SkillUp（Coursera）</td><td role="cell" data-label="名称">Generative AI for Customer Support Specialization（2026年11月）</td><td role="cell" data-label="確認先"><a href="https://coursera.org/verify/specialization/OMTLYQ07JYCJ">Coursera</a></td></tr>
+    <tr role="row"><td role="cell" data-label="発行元">IBM・SkillUp（Coursera）</td><td role="cell" data-label="名称">Generative AI for Business Analysts Specialization（2026年11月）</td><td role="cell" data-label="確認先"><a href="https://coursera.org/verify/specialization/55QU54K709E6">Coursera</a></td></tr>
+    <tr role="row"><td role="cell" data-label="発行元">IBM・SkillUp（Coursera）</td><td role="cell" data-label="名称">Generative AI for Product Owners Specialization（2026年11月）</td><td role="cell" data-label="確認先"><a href="https://coursera.org/verify/specialization/GV933L70CF5H">Coursera</a></td></tr>
+    <tr role="row"><td role="cell" data-label="発行元">IBM・SkillUp（Coursera）</td><td role="cell" data-label="名称">Generative AI for Program Managers Specialization（2026年11月）</td><td role="cell" data-label="確認先"><a href="https://coursera.org/verify/specialization/2UM2B4YPBE3R">Coursera</a></td></tr>
+    <tr role="row"><td role="cell" data-label="発行元">IBM・SkillUp（Coursera）</td><td role="cell" data-label="名称">Generative AI for Human Resources (HR) Professionals Specialization（2026年11月）</td><td role="cell" data-label="確認先"><a href="https://coursera.org/verify/specialization/37E7C5NP1PBH">Coursera</a></td></tr>
+    <tr role="row"><td role="cell" data-label="発行元">IBM・SkillUp（Coursera）</td><td role="cell" data-label="名称">Generative AI for Mobile App Developers Specialization（2026年11月）</td><td role="cell" data-label="確認先"><a href="https://coursera.org/verify/specialization/JR6T1E2RQ9N4">Coursera</a></td></tr>
+    <tr role="row"><td role="cell" data-label="発行元">IBM・SkillUp（Coursera）</td><td role="cell" data-label="名称">Generative AI for Java and Spring Developers Specialization（2026年11月）</td><td role="cell" data-label="確認先"><a href="https://coursera.org/verify/specialization/B9QN8DNIG02S">Coursera</a></td></tr>
+    <tr role="row"><td role="cell" data-label="発行元">IBM・SkillUp（Coursera）</td><td role="cell" data-label="名称">Generative AI for Project Managers Specialization（2026年11月）</td><td role="cell" data-label="確認先"><a href="https://coursera.org/verify/specialization/GP6H5OLNH2C0">Coursera</a></td></tr>
+    <tr role="row"><td role="cell" data-label="発行元">IBM（Coursera）</td><td role="cell" data-label="名称">Generative AI for Educators Specialization（2026年11月）</td><td role="cell" data-label="確認先"><a href="https://coursera.org/verify/specialization/201S3URRD6PC">Coursera</a></td></tr>
+    <tr role="row"><td role="cell" data-label="発行元">IBM（Coursera）</td><td role="cell" data-label="名称">Generative AI for Sales Professionals Specialization（2026年11月）</td><td role="cell" data-label="確認先"><a href="https://coursera.org/verify/specialization/YPDDPFNZ023P">Coursera</a></td></tr>
+    <tr role="row"><td role="cell" data-label="発行元">IBM（Coursera）</td><td role="cell" data-label="名称">Generative AI for Data Analysts Specialization（2026年11月）</td><td role="cell" data-label="確認先"><a href="https://coursera.org/verify/specialization/YGUR9S8VTTEY">Coursera</a></td></tr>
+    <tr role="row"><td role="cell" data-label="発行元">IBM（Coursera）</td><td role="cell" data-label="名称">Generative AI for Data Engineers Specialization（2026年11月）</td><td role="cell" data-label="確認先"><a href="https://coursera.org/verify/specialization/5BDOBS95XGH0">Coursera</a></td></tr>
+    <tr role="row"><td role="cell" data-label="発行元">IBM（Coursera）</td><td role="cell" data-label="名称">Generative AI for Data Scientists Specialization（2026年11月）</td><td role="cell" data-label="確認先"><a href="https://coursera.org/verify/specialization/KJVF3L4E0UQP">Coursera</a></td></tr>
+    <tr role="row"><td role="cell" data-label="発行元">IBM（Coursera）</td><td role="cell" data-label="名称">Generative AI Fundamentals Specialization（2026年11月）</td><td role="cell" data-label="確認先"><a href="https://coursera.org/verify/specialization/PCQP03UXKDYZ">Coursera</a></td></tr>
+    <tr role="row"><td role="cell" data-label="発行元">IBM（Coursera）</td><td role="cell" data-label="名称">Generative AI for Executives and Business Leaders Specialization（2026年11月）</td><td role="cell" data-label="確認先"><a href="https://coursera.org/verify/specialization/YZ1G6P9A9ZR9">Coursera</a></td></tr>
+    <tr role="row"><td role="cell" data-label="発行元">IBM（Coursera）</td><td role="cell" data-label="名称">Generative AI for Software Developers Specialization（2026年11月）</td><td role="cell" data-label="確認先"><a href="https://coursera.org/verify/specialization/ZOK95KMOY3CE">Coursera</a></td></tr>
+    <tr role="row"><td role="cell" data-label="発行元">IBM（Coursera）</td><td role="cell" data-label="名称">AI Foundations for Everyone Specialization（2026年11月）</td><td role="cell" data-label="確認先"><a href="https://coursera.org/verify/specialization/59HG8CJJO4U3">Coursera</a></td></tr>
+    <tr role="row"><td role="cell" data-label="発行元">IBM（Coursera）</td><td role="cell" data-label="名称">IBM Generative AI for Cybersecurity Professionals Specialization（2026年11月）</td><td role="cell" data-label="確認先"><a href="https://coursera.org/verify/specialization/K06Q6MGL83VN">Coursera</a></td></tr>
+    <tr role="row"><td role="cell" data-label="発行元">IBM（Coursera）</td><td role="cell" data-label="名称">Generative AI Engineering with LLMs Specialization（2026年11月）</td><td role="cell" data-label="確認先"><a href="https://coursera.org/verify/specialization/2H28YMTAH0MC">Coursera</a></td></tr>
+    <tr role="row"><td role="cell" data-label="発行元">IBM（Coursera）</td><td role="cell" data-label="名称">Building AI Agents and Agentic Workflows Specialization（2026年11月）</td><td role="cell" data-label="確認先"><a href="https://coursera.org/verify/specialization/3RJ5WQS97R7J">Coursera</a></td></tr>
+    <tr role="row"><td role="cell" data-label="発行元">IBM（Coursera）</td><td role="cell" data-label="名称">RAG for Generative AI Applications Specialization（2026年11月）</td><td role="cell" data-label="確認先"><a href="https://coursera.org/verify/specialization/UR7PYSSSBXZ3">Coursera</a></td></tr>
+    <tr role="row"><td role="cell" data-label="発行元">Google（Coursera）</td><td role="cell" data-label="名称">Google AI Essentials Specialization（2026年10月）</td><td role="cell" data-label="確認先"><a href="https://coursera.org/verify/specialization/101M4AEO8E8T">Coursera</a></td></tr>
+    <tr role="row"><td role="cell" data-label="発行元">Google（Coursera）</td><td role="cell" data-label="名称">Google Prompting Essentials Specialization（2026年10月）</td><td role="cell" data-label="確認先"><a href="https://coursera.org/verify/specialization/FDQOYMDUDI15">Coursera</a></td></tr>
     </tbody>
   </table>
   </div>
   <h3>LinkedIn Learningで取得した修了証23件</h3>
   <div class="table-wrap">
-  <table>
-    <thead><tr><th>発行元</th><th>名称</th><th>確認先</th></tr></thead>
-    <tbody>
-    <tr><td>ServiceNow（LinkedIn Learning）</td><td>ServiceNow IT Leadership Professional Certificate（2026年3月）</td><td><a href="https://www.linkedin.com/learning/certificates/bb6638f7d04cd987fc28f3cf4d6ad32d4d9e998ace8136897b9b5f7c48e92d67">LinkedIn</a></td></tr>
-    <tr><td>Snowflake（LinkedIn Learning）</td><td>Generative AI Professional Certificate by Snowflake（2026年3月）</td><td><a href="https://www.linkedin.com/learning/certificates/126a02d48bec6915065b2121e7428e001eec67a1801c7d5b520a885632dd7b4f">LinkedIn</a></td></tr>
-    <tr><td>Snowflake（LinkedIn Learning）</td><td>Data Engineering Professional Certificate by Snowflake（2026年2月）</td><td><a href="https://www.linkedin.com/learning/certificates/511f730a2056096e49b065be17d96c5d365a4ca31ff7b7f92252d20fcc608e20">LinkedIn</a></td></tr>
-    <tr><td>Docker（LinkedIn Learning）</td><td>Docker Foundations Professional Certificate（2026年1月）</td><td><a href="https://www.linkedin.com/learning/certificates/6bb62201acd7e3670d6fd1918a775fbfc3eb7fb274a4c971082eb020112b9f26">LinkedIn</a></td></tr>
-    <tr><td>Microsoft（LinkedIn Learning）</td><td>Microsoft Azure AI Essentials Professional Certificate（2026年1月）</td><td><a href="https://www.linkedin.com/learning/certificates/0607ee52ff0b91809ff56d4ba5c204c321ae24a1f67af42f4c9dc02342e304a9">LinkedIn</a></td></tr>
-    <tr><td>Microsoft（LinkedIn Learning）</td><td>Microsoft Security Essentials Professional Certificate（2026年1月）</td><td><a href="https://www.linkedin.com/learning/certificates/59bb74c98158d44623559cd079b9accfae9d3c18f836fa27ac947dd502160b0b">LinkedIn</a></td></tr>
-    <tr><td>Microsoft（LinkedIn Learning）</td><td>Microsoft Copilot for Productivity（2026年1月）</td><td><a href="https://www.linkedin.com/learning/certificates/4ec16604f71f1d9bfe0b954c2201b7b3a2296180a1a6c63d79e80b2fa87da4b6">LinkedIn</a></td></tr>
-    <tr><td>Microsoft（LinkedIn Learning）</td><td>Career Essentials in Cybersecurity（2026年1月）</td><td><a href="https://www.linkedin.com/learning/certificates/3ae09e95db93d528fd18827bb99f2970632854e39553d2263aaa3064560e3786">LinkedIn</a></td></tr>
-    <tr><td>Microsoft（LinkedIn Learning）</td><td>Career Essentials in System Administration（2026年1月）</td><td><a href="https://www.linkedin.com/learning/certificates/e2e295fe2beb74eca1bb72bc81601ce2dec8eb525f7f7ebc85903e62c65ec38a">LinkedIn</a></td></tr>
-    <tr><td>Microsoft（LinkedIn Learning）</td><td>Career Essentials in Software Development（2026年1月）</td><td><a href="https://www.linkedin.com/learning/certificates/eef45db98c97269f7f8d185e0f2085498e813fb1177d0f58f0e421a23b79ff07">LinkedIn</a></td></tr>
-    <tr><td>Microsoft（LinkedIn Learning）</td><td>Career Essentials in Data Analysis（2026年1月）</td><td><a href="https://www.linkedin.com/learning/certificates/3589ebe4d447f8036fb571eb675966085cdf4fa14a5752d8caf11c5de3fb2b4c">LinkedIn</a></td></tr>
-    <tr><td>Microsoft（LinkedIn Learning）</td><td>Career Essentials in Business Analysis（2026年1月）</td><td><a href="https://www.linkedin.com/learning/certificates/d2fac4e69afc4510f19ee619659c643a57bb8f8db4f71565cca1c7b41422d896">LinkedIn</a></td></tr>
-    <tr><td>Microsoft（LinkedIn Learning）</td><td>Career Essentials in Generative AI（2026年1月）</td><td><a href="https://www.linkedin.com/learning/certificates/92ce03c53e743dd8f17dd28c818bbcbefae8c107efe8961ee73c99b91aba9c4f">LinkedIn</a></td></tr>
-    <tr><td>Microsoft（LinkedIn Learning）</td><td>Build Your Generative AI Productivity Skills（2026年1月）</td><td><a href="https://www.linkedin.com/learning/certificates/a09404dbe1359826727017ead515855949eb3028689af883589f8c1c0c207fc5">LinkedIn</a></td></tr>
-    <tr><td>Microsoft（LinkedIn Learning）</td><td>Generative AI for Customer Service with Microsoft 365 Copilot Professional Certificate（2026年1月）</td><td><a href="https://www.linkedin.com/learning/certificates/4264a9861677a1a3c09b670e0a302ad8120d28579cc86fe12b5d70eca1d716dd">LinkedIn</a></td></tr>
-    <tr><td>Microsoft（LinkedIn Learning）</td><td>Generative AI for Sales with Microsoft 365 Copilot Professional Certificate（2026年1月）</td><td><a href="https://www.linkedin.com/learning/certificates/e24aac9bdb2710e81bb117a379ca9fbc653effc0f7c7bc41d849e701ba9d8be4">LinkedIn</a></td></tr>
-    <tr><td>Microsoft（LinkedIn Learning）</td><td>Generative AI for Marketing with Microsoft 365 Copilot Professional Certificate（2026年1月）</td><td><a href="https://www.linkedin.com/learning/certificates/f24d5d16df27b347dc5cd744d58b94be4fa3618d655a059ba67b2f90d7b311b2">LinkedIn</a></td></tr>
-    <tr><td>Microsoft（LinkedIn Learning）</td><td>AI for Managers（2026年1月）</td><td><a href="https://www.linkedin.com/learning/certificates/36ce9ce3c95e2cf2496360d3ee3487184628417e27b7047b1d3357059f572aa8">LinkedIn</a></td></tr>
-    <tr><td>Microsoft（LinkedIn Learning）</td><td>AI for Organizational Leaders（2026年1月）</td><td><a href="https://www.linkedin.com/learning/certificates/c4bc1faa7d01240b45106b6bfffc8ef8da12a43a4783a793c9ce9a231a15dee4">LinkedIn</a></td></tr>
-    <tr><td>Microsoft（LinkedIn Learning）</td><td>Career Essentials in Sustainable Tech（2026年1月）</td><td><a href="https://www.linkedin.com/learning/certificates/214075e4a91ca55a684995a592edd11d94c484cd1f3cf6c44e0a080eda3201a8">LinkedIn</a></td></tr>
-    <tr><td>Microsoft Elevate・NetHope（LinkedIn Learning）</td><td>AI for Nonprofits Professional Certificate（2026年3月）</td><td><a href="https://www.linkedin.com/learning/certificates/eb6e240e45e2c755c61fca8813d966d60fd28f04a5f67636d98eb9680a11c706">LinkedIn</a></td></tr>
-    <tr><td>All Tech Is Human（LinkedIn Learning）</td><td>Responsible AI Foundations Professional Certificate（2026年3月）</td><td><a href="https://www.linkedin.com/learning/certificates/c781a3a533a6f41f24696f8b7882d3080d58a93d784bdd00a62c127a623ef45d">LinkedIn</a></td></tr>
-    <tr><td>LinkedIn（LinkedIn Learning）</td><td>Generative AI for Learning and Development Professional Certificate（2026年3月）</td><td><a href="https://www.linkedin.com/learning/certificates/c5eeeac5385090e9c9bd4a3fbb51c5ff741c07ae417ab068938c1c28a04c9618">LinkedIn</a></td></tr>
+  <table class="stack compact" role="table">
+    <thead role="rowgroup"><tr role="row"><th role="columnheader">発行元</th><th role="columnheader">名称</th><th role="columnheader">確認先</th></tr></thead>
+    <tbody role="rowgroup">
+    <tr role="row"><td role="cell" data-label="発行元">ServiceNow（LinkedIn Learning）</td><td role="cell" data-label="名称">ServiceNow IT Leadership Professional Certificate（2026年3月）</td><td role="cell" data-label="確認先"><a href="https://www.linkedin.com/learning/certificates/bb6638f7d04cd987fc28f3cf4d6ad32d4d9e998ace8136897b9b5f7c48e92d67">LinkedIn</a></td></tr>
+    <tr role="row"><td role="cell" data-label="発行元">Snowflake（LinkedIn Learning）</td><td role="cell" data-label="名称">Generative AI Professional Certificate by Snowflake（2026年3月）</td><td role="cell" data-label="確認先"><a href="https://www.linkedin.com/learning/certificates/126a02d48bec6915065b2121e7428e001eec67a1801c7d5b520a885632dd7b4f">LinkedIn</a></td></tr>
+    <tr role="row"><td role="cell" data-label="発行元">Snowflake（LinkedIn Learning）</td><td role="cell" data-label="名称">Data Engineering Professional Certificate by Snowflake（2026年2月）</td><td role="cell" data-label="確認先"><a href="https://www.linkedin.com/learning/certificates/511f730a2056096e49b065be17d96c5d365a4ca31ff7b7f92252d20fcc608e20">LinkedIn</a></td></tr>
+    <tr role="row"><td role="cell" data-label="発行元">Docker（LinkedIn Learning）</td><td role="cell" data-label="名称">Docker Foundations Professional Certificate（2026年1月）</td><td role="cell" data-label="確認先"><a href="https://www.linkedin.com/learning/certificates/6bb62201acd7e3670d6fd1918a775fbfc3eb7fb274a4c971082eb020112b9f26">LinkedIn</a></td></tr>
+    <tr role="row"><td role="cell" data-label="発行元">Microsoft（LinkedIn Learning）</td><td role="cell" data-label="名称">Microsoft Azure AI Essentials Professional Certificate（2026年1月）</td><td role="cell" data-label="確認先"><a href="https://www.linkedin.com/learning/certificates/0607ee52ff0b91809ff56d4ba5c204c321ae24a1f67af42f4c9dc02342e304a9">LinkedIn</a></td></tr>
+    <tr role="row"><td role="cell" data-label="発行元">Microsoft（LinkedIn Learning）</td><td role="cell" data-label="名称">Microsoft Security Essentials Professional Certificate（2026年1月）</td><td role="cell" data-label="確認先"><a href="https://www.linkedin.com/learning/certificates/59bb74c98158d44623559cd079b9accfae9d3c18f836fa27ac947dd502160b0b">LinkedIn</a></td></tr>
+    <tr role="row"><td role="cell" data-label="発行元">Microsoft（LinkedIn Learning）</td><td role="cell" data-label="名称">Microsoft Copilot for Productivity（2026年1月）</td><td role="cell" data-label="確認先"><a href="https://www.linkedin.com/learning/certificates/4ec16604f71f1d9bfe0b954c2201b7b3a2296180a1a6c63d79e80b2fa87da4b6">LinkedIn</a></td></tr>
+    <tr role="row"><td role="cell" data-label="発行元">Microsoft（LinkedIn Learning）</td><td role="cell" data-label="名称">Career Essentials in Cybersecurity（2026年1月）</td><td role="cell" data-label="確認先"><a href="https://www.linkedin.com/learning/certificates/3ae09e95db93d528fd18827bb99f2970632854e39553d2263aaa3064560e3786">LinkedIn</a></td></tr>
+    <tr role="row"><td role="cell" data-label="発行元">Microsoft（LinkedIn Learning）</td><td role="cell" data-label="名称">Career Essentials in System Administration（2026年1月）</td><td role="cell" data-label="確認先"><a href="https://www.linkedin.com/learning/certificates/e2e295fe2beb74eca1bb72bc81601ce2dec8eb525f7f7ebc85903e62c65ec38a">LinkedIn</a></td></tr>
+    <tr role="row"><td role="cell" data-label="発行元">Microsoft（LinkedIn Learning）</td><td role="cell" data-label="名称">Career Essentials in Software Development（2026年1月）</td><td role="cell" data-label="確認先"><a href="https://www.linkedin.com/learning/certificates/eef45db98c97269f7f8d185e0f2085498e813fb1177d0f58f0e421a23b79ff07">LinkedIn</a></td></tr>
+    <tr role="row"><td role="cell" data-label="発行元">Microsoft（LinkedIn Learning）</td><td role="cell" data-label="名称">Career Essentials in Data Analysis（2026年1月）</td><td role="cell" data-label="確認先"><a href="https://www.linkedin.com/learning/certificates/3589ebe4d447f8036fb571eb675966085cdf4fa14a5752d8caf11c5de3fb2b4c">LinkedIn</a></td></tr>
+    <tr role="row"><td role="cell" data-label="発行元">Microsoft（LinkedIn Learning）</td><td role="cell" data-label="名称">Career Essentials in Business Analysis（2026年1月）</td><td role="cell" data-label="確認先"><a href="https://www.linkedin.com/learning/certificates/d2fac4e69afc4510f19ee619659c643a57bb8f8db4f71565cca1c7b41422d896">LinkedIn</a></td></tr>
+    <tr role="row"><td role="cell" data-label="発行元">Microsoft（LinkedIn Learning）</td><td role="cell" data-label="名称">Career Essentials in Generative AI（2026年1月）</td><td role="cell" data-label="確認先"><a href="https://www.linkedin.com/learning/certificates/92ce03c53e743dd8f17dd28c818bbcbefae8c107efe8961ee73c99b91aba9c4f">LinkedIn</a></td></tr>
+    <tr role="row"><td role="cell" data-label="発行元">Microsoft（LinkedIn Learning）</td><td role="cell" data-label="名称">Build Your Generative AI Productivity Skills（2026年1月）</td><td role="cell" data-label="確認先"><a href="https://www.linkedin.com/learning/certificates/a09404dbe1359826727017ead515855949eb3028689af883589f8c1c0c207fc5">LinkedIn</a></td></tr>
+    <tr role="row"><td role="cell" data-label="発行元">Microsoft（LinkedIn Learning）</td><td role="cell" data-label="名称">Generative AI for Customer Service with Microsoft 365 Copilot Professional Certificate（2026年1月）</td><td role="cell" data-label="確認先"><a href="https://www.linkedin.com/learning/certificates/4264a9861677a1a3c09b670e0a302ad8120d28579cc86fe12b5d70eca1d716dd">LinkedIn</a></td></tr>
+    <tr role="row"><td role="cell" data-label="発行元">Microsoft（LinkedIn Learning）</td><td role="cell" data-label="名称">Generative AI for Sales with Microsoft 365 Copilot Professional Certificate（2026年1月）</td><td role="cell" data-label="確認先"><a href="https://www.linkedin.com/learning/certificates/e24aac9bdb2710e81bb117a379ca9fbc653effc0f7c7bc41d849e701ba9d8be4">LinkedIn</a></td></tr>
+    <tr role="row"><td role="cell" data-label="発行元">Microsoft（LinkedIn Learning）</td><td role="cell" data-label="名称">Generative AI for Marketing with Microsoft 365 Copilot Professional Certificate（2026年1月）</td><td role="cell" data-label="確認先"><a href="https://www.linkedin.com/learning/certificates/f24d5d16df27b347dc5cd744d58b94be4fa3618d655a059ba67b2f90d7b311b2">LinkedIn</a></td></tr>
+    <tr role="row"><td role="cell" data-label="発行元">Microsoft（LinkedIn Learning）</td><td role="cell" data-label="名称">AI for Managers（2026年1月）</td><td role="cell" data-label="確認先"><a href="https://www.linkedin.com/learning/certificates/36ce9ce3c95e2cf2496360d3ee3487184628417e27b7047b1d3357059f572aa8">LinkedIn</a></td></tr>
+    <tr role="row"><td role="cell" data-label="発行元">Microsoft（LinkedIn Learning）</td><td role="cell" data-label="名称">AI for Organizational Leaders（2026年1月）</td><td role="cell" data-label="確認先"><a href="https://www.linkedin.com/learning/certificates/c4bc1faa7d01240b45106b6bfffc8ef8da12a43a4783a793c9ce9a231a15dee4">LinkedIn</a></td></tr>
+    <tr role="row"><td role="cell" data-label="発行元">Microsoft（LinkedIn Learning）</td><td role="cell" data-label="名称">Career Essentials in Sustainable Tech（2026年1月）</td><td role="cell" data-label="確認先"><a href="https://www.linkedin.com/learning/certificates/214075e4a91ca55a684995a592edd11d94c484cd1f3cf6c44e0a080eda3201a8">LinkedIn</a></td></tr>
+    <tr role="row"><td role="cell" data-label="発行元">Microsoft Elevate・NetHope（LinkedIn Learning）</td><td role="cell" data-label="名称">AI for Nonprofits Professional Certificate（2026年3月）</td><td role="cell" data-label="確認先"><a href="https://www.linkedin.com/learning/certificates/eb6e240e45e2c755c61fca8813d966d60fd28f04a5f67636d98eb9680a11c706">LinkedIn</a></td></tr>
+    <tr role="row"><td role="cell" data-label="発行元">All Tech Is Human（LinkedIn Learning）</td><td role="cell" data-label="名称">Responsible AI Foundations Professional Certificate（2026年3月）</td><td role="cell" data-label="確認先"><a href="https://www.linkedin.com/learning/certificates/c781a3a533a6f41f24696f8b7882d3080d58a93d784bdd00a62c127a623ef45d">LinkedIn</a></td></tr>
+    <tr role="row"><td role="cell" data-label="発行元">LinkedIn（LinkedIn Learning）</td><td role="cell" data-label="名称">Generative AI for Learning and Development Professional Certificate（2026年3月）</td><td role="cell" data-label="確認先"><a href="https://www.linkedin.com/learning/certificates/c5eeeac5385090e9c9bd4a3fbb51c5ff741c07ae417ab068938c1c28a04c9618">LinkedIn</a></td></tr>
     </tbody>
   </table>
   </div>
